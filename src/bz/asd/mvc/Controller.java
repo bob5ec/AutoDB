@@ -22,9 +22,9 @@ public abstract class Controller {
     protected abstract View createView();
     protected abstract Model createModel();
 
-    public void handleException(Throwable e) {
+    /*public void handleException(Throwable e) {
         e.printStackTrace();
-    }
+    }*/
 
     //TODO View needs to initializes AFTER Model and Controller has been set?
 

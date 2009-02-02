@@ -1,5 +1,6 @@
 package bz.asd.autodb.logic;
 
+import bz.asd.autodb.data.Database;
 import bz.asd.autodb.data.Settings;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
@@ -7,6 +8,21 @@ import bz.asd.mvc.View;
 import bz.asd.autodb.gui.MainWindow;
 
 public class MainWindowController extends Controller {
+
+    private Database db;
+    private TreeViewController twc;
+    
+    /**
+     * Get the instance of the TreeViewController, which is kind of a Singleton.
+     * @return
+     */
+    public TreeViewController getTreeViewController() {
+        if (twc == null) {
+            twc = new TreeViewController();
+            twc
+        }
+        return twc;
+    }
 
     /**
      * User want's to open the Db.

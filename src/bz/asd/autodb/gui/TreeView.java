@@ -11,15 +11,27 @@
 
 package bz.asd.autodb.gui;
 
+import bz.asd.mvc.Controller;
+import bz.asd.mvc.Model;
+import bz.asd.mvc.View;
+
 /**
  *
  * @author lars
  */
-public class TreeView extends javax.swing.JPanel {
+public class TreeView extends javax.swing.JPanel implements View {
 
     /** Creates new form TreeView */
     public TreeView() {
         initComponents();
+    }
+
+    public void setModel(GroupTreeRoot model) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void setController(Controller controller) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /** This method is called from within the constructor to
@@ -53,5 +65,7 @@ public class TreeView extends javax.swing.JPanel {
     private bz.asd.autodb.gui.ScrollControl scrollControl1;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
+
+
 
 }
