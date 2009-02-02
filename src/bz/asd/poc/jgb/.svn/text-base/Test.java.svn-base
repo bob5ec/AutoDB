@@ -1,0 +1,30 @@
+package bz.asd.poc.jgb;
+
+import java.io.FileInputStream;
+
+import javax.swing.JDialog;
+
+import org.xml.sax.SAXException;
+
+import jgb.builder.Builder;
+import jgb.builder.DefaultBuilder;
+
+public class Test {
+
+	private Builder guiBuilder = new DefaultBuilder();
+
+	public void show(java.io.FileInputStream in) throws java.io.IOException, SAXException {
+		guiBuilder.build(in);
+		JDialog loginDialog = (JDialog)guiBuilder.getObject("loginDialog");
+		loginDialog.setTitle("Main Application Login");
+		loginDialog.setModal(true);
+		loginDialog.pack();
+		loginDialog.setVisible(true);
+	}
+
+	public static void main(String[] args) throws java.lang.Exception {
+		new Test().show(new FileInputStream("src/bz/asd/poc/jgb/simplewindow.xml"));
+	}
+
+
+}

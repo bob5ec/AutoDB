@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_07" class="java.beans.XMLDecoder"> 
+ <object class="bz.asd.autodb.data.UserSession"> 
+  <void property="lastOpenFiles"> 
+   <array class="java.lang.String" length="2"> 
+    <void index="0"> 
+     <string>a</string> 
+    </void> 
+    <void index="1"> 
+     <string>b</string> 
+    </void> 
+   </array> 
+  </void> 
+ </object> 
+</java> 

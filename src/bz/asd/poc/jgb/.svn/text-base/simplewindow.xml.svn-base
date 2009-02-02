@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+/**
+* Java Gui Builder - A library to build GUIs using an XML file.
+* Copyright 2002, 2003 (C) François Beausoleil
+*
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU Lesser General Public
+* License as published by the Free Software Foundation; either
+* version 2.1 of the License, or (at your option) any later version.
+*
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Lesser General Public
+* License along with this library; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+*/
+-->
+<!DOCTYPE window PUBLIC
+    "-//SOURCEFORGE/Java Gui Builder DTD version 1.0//EN"
+    "http://jgb.sourceforge.net/dtd/jgb.dtd">
+<!--
+    A login dialog.  Here's what it should look like in the end:
+
+             GridLayout (2 wide, 1 high)
+     ___________________________________________
+    |  _____________                            |
+    | |             |                           |
+    | |             |  Username: [JLabel]       |
+    | |             |  |_JTextField__________|  |
+    | | Image       |                           |  BorderLayout.CENTER
+    | |             |  Password: [JLabel]       |
+    | |_____________|  |_JTextField__________|  |
+    |___________________________________________|
+    |                                           |
+    |                         ____   ________   |
+    |                        |_OK_| |_CANCEL_|  |  BorderLayout.SOUTH
+    |___________________________________________|
+-->
+
+<!--
+    In this example, the dialog is named "loginDialog".  It's base class is
+    javax.swing.JDialog.
+
+    The id is the one you use to get the item from the builder once it
+    returns from build.  You should call
+        JDialog dialog = (JDialog)builder.get("loginDialog");
+    if you need to access it directly.
+-->
+<window id="loginDialog" type="jdialog">
+    <!--
+        Begin object declarations.  These objects will be available, through
+        their id attribute, from the builder's get method.
+    -->
+
+    <!-- Declare a URL object to JUnit's frog. -->
+    <object id="junitIconURL" class="java.net.URL">
+        <constructor>
+            <parameter name="url">
+                <value type="string" data="http://www.junit.org/images/frogMov.gif" />
+            </parameter>
+        </constructor>
+    </object>
+
+    <!--
+        Here, we create an ImageIcon that we will use to display
+        the image on the left side of the login screen.
+    -->
+    <object id="loginImageIcon" class="javax.swing.ImageIcon">
+        <!--
+            Declare that we are going to call the ImageIcon(URL) constructor.
+        -->
+        <constructor>
+            <parameter name="url"><ref refid="junitIconURL" /></parameter>
+        </constructor>
+    </object>
+
+    <!--
+        We are now going to set up this window's content.
+
+        The <controls> tag will put in the context the current window's
+        reference as well as it's ID.  If any of it's children needs to
+        access the top-level window (instead of it's immediate parent),
+        it will be able to using these two context items.
+    -->
+    <controls>
+        <!--
+            We first start by setting which constraints we want to
+            use.  In this instance, the control which will apply the
+            constraints happens to be the dialog's content pane.
+
+            Constraints always apply to the next controls and
+            layouts added after the constraint declaration.
+        -->
+        <constraints>
+            <constant name="java.awt.BorderLayout.CENTER" />
+        </constraints>
+
+        <!--
+            We have set our desired constraints.  We can now declare/add
+            our first control.  For our example, this will be a new layout
+            region.  We declare that it will use a java.awt.GridLayout.
+
+            Notice that the class attribute simply declares "GridLayout".
+            The fully qualified class name did not have to be specified.
+            This is because <layout> searches in java.awt by default, whereas
+            <control> searches in javax.swing.
+
+            You may always specify the FQ class, and JGB will try to find
+            it.  If it cannot, it will throw a SAXException, setting the
+            cause to an appropriate ClassNotFound or InstantiationException.
+
+            NOTE:  When you use <layout>, JGB actually instantiates a
+            JPanel and sets it's layout manager to an instance of the
+            specified class.
+
+            NOTE 2:  Please notice that none of the controls or layout
+            regions declared below use the <constructor> tag.  This is
+            because all controls and layout regions are expected to provide
+            a default, no-arg constructor.  When using the <object> tag,
+            you are required to provide a <constructor>, even if it must
+            be empty.
+        -->
+        <control class="JPanel">
+            <layout class="GridLayout">
+                <property name="rows"><value type="int" data="1" /></property>
+                <property name="columns"><value type="int" data="2" /></property>
+                <property name="hgap"><value type="int" data="6" /></property>
+            </layout>
+
+            <!--
+                Our first real control !  This is the image that goes
+                on the left side of the login dialog.
+
+                Notice that we are using a reference to an already
+                instantiated object to set the control's icon property.
+            -->
+            <control class="JLabel">
+                <property name="icon">
+                    <ref refid="loginImageIcon" />
+                </property>
+            </control>
+
+            <!--
+                The second control we add to our grid is another layout
+                region.  It too uses a GridLayout, but different parameters
+                for the same properties.
+            -->
+            <control class="JPanel">
+                <layout class="GridLayout">
+                    <property name="rows"><value type="int" data="4" /></property>
+                    <property name="columns"><value type="int" data="1" /></property>
+                </layout>
+
+                <!--
+                    The next four controls are added in order to the
+                    current control.  In this case, it happens to be
+                    the above mentionned GridLayout.
+                -->
+                <control id="usernameLabel" class="JLabel">
+                    <property name="text">
+                        <value type="string" data="Username:" />
+                    </property>
+
+                    <property name="displayedMnemonic">
+                        <constant name="java.awt.event.KeyEvent.VK_U" />
+                    </property>
+                </control>
+
+                <!--
+                    Here, we are instantiating the control without any
+                    special handling.
+                -->
+                <control id="usernameField" class="JTextField" />
+
+                <control id="passwordLabel" class="JLabel">
+                    <property name="text">
+                        <value type="string" data="Password:" />
+                    </property>
+
+                    <property name="displayedMnemonic">
+                        <constant name="java.awt.event.KeyEvent.VK_P" />
+                    </property>
+                </control>
+
+                <control id="passwordField" class="JTextField" />
+            </control>
+
+            <!--
+                Set the labelFor for each controls
+            -->
+            <methodCall refid="usernameLabel" method="setLabelFor">
+                <parameter><ref refid="usernameField" /></parameter>
+            </methodCall>
+
+            <methodCall refid="passwordLabel" method="setLabelFor">
+                <parameter><ref refid="passwordField" /></parameter>
+            </methodCall>
+        </control>
+
+        <!--
+            At this point in the file, the current constraints are still
+            set to java.awt.BorderLayout.CENTER.  This is because no
+            other constraints were set inside the previous layout/control
+            regions.  If they had been changed, they would need to be
+            reset here.
+
+            Set the current control's constraints (this happens to be
+            the dialog's content pane).  This will allow us to create
+            a layout and put the Ok/Cancel buttons in it.
+        -->
+        <constraints>
+            <constant name="java.awt.BorderLayout.SOUTH" />
+        </constraints>
+
+        <!--
+            Create a new layout region.
+        -->
+        <control class="JPanel">
+            <layout class="FlowLayout" />
+
+            <control id="okButton" class="JButton">
+                <!-- Set this button's text to "Ok" -->
+                <property name="text">
+                    <value type="string" data="Ok" />
+                </property>
+
+                <!-- Equivalent to setMnemonic(java.awt.event.KeyEvent.VK_O); -->
+                <property name="mnemonic">
+                    <constant name="java.awt.event.KeyEvent.VK_O" />
+                </property>
+            </control>
+
+            <control id="cancelButton" class="JButton">
+                <!-- Equivalent to setText("Ok"); -->
+                <property name="text">
+                    <value type="string" data="Cancel" />
+                </property>
+
+                <!-- Equivalent to setMnemonic(java.awt.event.KeyEvent.VK_C); -->
+                <property name="mnemonic">
+                    <constant name="java.awt.event.KeyEvent.VK_C" />
+                </property>
+            </control>
+        </control>
+    </controls>
+
+    <!--
+        Next, we set two properties:
+         - Window title;
+         - Modality.
+
+        After the next two lines are read, the current object (loginDialog)
+        will have it's setTitle(String) and it's setModal(boolean) methods
+        called with the parameters specified below.
+    -->
+    <property name="title"><value type="string" data="Login Dialog" /></property>
+    <property name="modal"><value type="boolean" data="true" /></property>
+
+    <!--
+        Finally, pack and show the dialog.
+    -->
+    <methodCall refid="loginDialog" method="pack" />
+    <methodCall refid="loginDialog" method="setDefaultCloseOperation">
+        <parameter>
+            <constant name="javax.swing.WindowConstants.DISPOSE_ON_CLOSE" />
+        </parameter>
+    </methodCall>
+    <methodCall refid="loginDialog" method="setVisible">
+        <parameter>
+            <value type="boolean" data="true" />
+        </parameter>
+    </methodCall>
+</window>
+
+<!--
+    Here's the same window, rendered using standard Java code.
+    For this example, the JGB XML code is roughly twice as large
+    as the equivalent code in Java (number of lines only - not
+    characters !).
+
+public class LoginDialog extends JDialog {
+    private JTextField usernameField = new JTextField();
+    private JTextField passwordField = new JTextField();
+    private JButton okButton = new JButton("Ok");
+    private JButton cancelButton = new JButton("Cancel");
+
+    public LoginDialog() {
+        super((Frame)null, "Login Dialog", true);
+
+        try {
+            URL imageURL = new URL("http://www.junit.org/images/frogMov.gif");
+        } catch (MalformedURLException e) { }
+
+        ImageIcon loginImage = new ImageIcon(imageURL);
+        JPanel okCancelPanel = new JPanel();
+
+        okButton.setMnemonic(java.awt.event.KeyEvent.VK_O);
+        okCancelPanel.add(okButton);
+
+        cancelButton.setMnemonic(java.awt.event.KeyEvent.VK_C);
+        okCancelPanel.add(cancelButton);
+
+        JPanel loginPanel = new JPanel(new GridLayout(4, 1));
+        JLabel label;
+
+        label = new JLabel("Username:");
+        label.setDisplayedMnemonic(java.awt.event.KeyEvent.VK_U);
+        label.setLabelFor(usernameField); // Not possible in current JGB
+        loginPanel.add(label);
+        loginPanel.add(usernameField);
+
+        label = new JLabel("Password:");
+        label.setDisplayedMnemonic(java.awt.event.KeyEvent.VK_P);
+        label.setLabelFor(passwordField); // Not possible in current JGB
+        loginPanel.add(label);
+        loginPanel.add(passwordField);
+
+        JPanel mainPanel = new JPanel(new GridLayout(1, 2));
+        mainPanel.add(loginImage);
+        mainPanel.add(loginPanel);
+
+        getContentPane().add(mainPanel, BorderLayout.CENTER);
+        getContentPane().add(okCancelPanel, BorderLayout.SOUTH);
+
+        pack();
+        setDefaultCloseOpenration(JDialog.DISPOSE_ON_CLOSE);
+        setVisible(true);
+    }
+-->
