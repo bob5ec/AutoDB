@@ -14,6 +14,7 @@ package bz.asd.autodb.gui;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
+import javax.swing.tree.TreeModel;
 
 /**
  *
@@ -26,8 +27,8 @@ public class TreeView extends javax.swing.JPanel implements View {
         initComponents();
     }
 
-    public void setModel(GroupTreeRoot model) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setModel(Model model) {
+        jTree1.setModel((TreeModel) model);
     }
 
     public void setController(Controller controller) {
