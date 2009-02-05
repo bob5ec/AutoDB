@@ -2,26 +2,29 @@ package bz.asd.autodb.logic;
 
 import bz.asd.autodb.data.Database;
 import bz.asd.autodb.data.Settings;
+import bz.asd.autodb.data.db4o.Db4oDatabase;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.MainWindow;
+import java.io.File;
+import java.util.Vector;
 
 public class MainWindowController extends Controller {
 
     private Database db;
-    private TreeViewController twc;
+    private Vector<DbViewController> dbvc;
+
+    public MainWindowController() {
+        dbvc = new Vector<DbViewController>();
+    }
     
     /**
      * Get the instance of the TreeViewController, which is kind of a Singleton.
      * @return
      */
-    public TreeViewController getTreeViewController() {
-        if (twc == null) {
-            twc = new TreeViewController();
-            twc
-        }
-        return twc;
+    public Vector<DbViewController> getDbViewController() {
+        return dbvc;
     }
 
     /**
@@ -30,7 +33,14 @@ public class MainWindowController extends Controller {
      * 2. open the chosen Db
      */
 	public void open() {
-        
+        //todo open file chooser
+
+        String dbName = "test";
+        // switch use database depanding on file extension
+        // Server db has an file which contains server,user,pwd,tablename
+
+        Database db = new Db4oDatabase(dbName);
+        dbvc.add(new DbViewController(db));
     }
 
     /**
@@ -40,7 +50,8 @@ public class MainWindowController extends Controller {
      * 3. close db
      */
     public void close() {
-        
+        // todo determine the active Db, which is ment by the user
+        // or move this to DbViewControll
     }
 
     /**
