@@ -7,23 +7,23 @@ import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.MainWindow;
+import bz.asd.autodb.gui.SubWindow;
 import java.io.File;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Vector;
 
 public class MainWindowController extends Controller {
 
-    private Database db;
-    private Vector<DbViewController> dbvc;
+    private DbViewController dbvc;
+    private Collection<SubWindow> subwindows;
 
     public MainWindowController() {
-        dbvc = new Vector<DbViewController>();
+        dbvc = null;
+        subwindows = new LinkedList<SubWindow>();
     }
     
-    /**
-     * Get the instance of the TreeViewController, which is kind of a Singleton.
-     * @return
-     */
-    public Vector<DbViewController> getDbViewController() {
+    public DbViewController getDbViewController() {
         return dbvc;
     }
 
@@ -33,6 +33,8 @@ public class MainWindowController extends Controller {
      * 2. open the chosen Db
      */
 	public void open() {
+
+
         //todo open file chooser
 
         String dbName = "test";
@@ -40,7 +42,19 @@ public class MainWindowController extends Controller {
         // Server db has an file which contains server,user,pwd,tablename
 
         Database db = new Db4oDatabase(dbName);
-        dbvc.add(new DbViewController(db));
+        DbViewController newDbvc = new DbViewController(db);
+
+        if(dbvc != null) {
+            SubWindow sub = new SubWindow();
+            sub.addComponent(newDbvc.getView());
+            sub.addCloseListener(newDbvc);
+            subwindows.add(sub);
+            sub.setVisible(true);
+        } else {
+            dbvc = newDbvc;
+
+        }
+        
     }
 
     /**

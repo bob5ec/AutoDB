@@ -5,6 +5,8 @@
 
 package bz.asd.mvc;
 
+import javax.swing.JComponent;
+
 /**
  * @link http://en.wikipedia.org/wiki/Model-view-controller
  * @author lars
