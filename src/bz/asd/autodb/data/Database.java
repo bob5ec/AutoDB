@@ -11,10 +11,16 @@ import java.util.Collection;
  * @author lars
  *
  */
-public interface Database {
+public interface Database extends bz.asd.mvc.Model {
 	public abstract void open() throws Exception;
 	public abstract void close() throws Exception;
 	public abstract void save() throws Exception;
+    /**
+     * Test if the database has unsaved changes
+     * @return true = not yet saved changes are present
+     * false = all changes were saved in the database
+     */
+    public abstract boolean hasChanged();
 	public abstract Collection<Model> getModels() throws Exception;
 	public abstract Model createModel() throws Exception;
 	public abstract void deleteModel(Model model) throws Exception;

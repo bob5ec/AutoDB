@@ -11,15 +11,32 @@
 
 package bz.asd.autodb.gui;
 
+import bz.asd.autodb.data.Database;
+import bz.asd.autodb.logic.DbViewController;
+import bz.asd.mvc.Controller;
+import bz.asd.mvc.Model;
+import bz.asd.mvc.View;
+
 /**
  *
  * @author lars
  */
-public class DbView extends javax.swing.JPanel {
+public class DbView extends javax.swing.JPanel implements View {
+
+    private DbViewController controller;
+    private Database db;
 
     /** Creates new form DbView */
     public DbView() {
         initComponents();
+    }
+
+    public void setModel(Model model) {
+        db = (Database) model;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = (DbViewController) controller;
     }
 
     /** This method is called from within the constructor to
@@ -80,5 +97,6 @@ public class DbView extends javax.swing.JPanel {
     private javax.swing.JPanel mainPanel;
     private bz.asd.autodb.gui.TreeView treeView1;
     // End of variables declaration//GEN-END:variables
+
 
 }

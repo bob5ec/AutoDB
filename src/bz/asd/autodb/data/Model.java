@@ -2,16 +2,28 @@ package bz.asd.autodb.data;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Date;
 
-public abstract class Model {
+public abstract class Model implements Groupable<Model> {
 	
 	public static final int SERIENMODELL=0, WERBEMODELL=1, UMBAU=2;
 
+    //todo use this array, when naming attributed in UI
+    //public static String[] attributeNames = {};
+    public static final int HERSTELLER=0, HERSTELLERNR=1, AUFLAGE=2, PRODUKTIONSDATUM=3,
+            BILDDATEI=4, MODELLSTANDORT=5, MARKE=6, ACHSFOLGE=7, TYP=8, AUFBAU=9,
+            ART=10, DRUCK=11, PREISEK=12, PREISVK=13, PREISSL=14, MODELLART=15,
+            AENDERUNGSDATUM=16;
+    public static int ATTRIBUTE_COUNT=17;
+    //todo a sort is an int array containig these numbers. the first element
+    //in this array is the first arrtibute to sort for
+
 	private String hersteller, herstellerNr, auflage, produktionsdatum,
-	bilddatei, modellStandort, aenderungsdatum,
+	bilddatei, modellStandort,
 	marke, achsfolge, typ, aufbau, art, druck,
 	preisEK, preisVK, preisSL;
 	private int modellArt;
+    private Date aenderungsdatum;
 	private List<ExtraProperty> extraProperties;
 	
 	public Model() {
@@ -23,8 +35,9 @@ public abstract class Model {
 	}
 	
 	protected abstract void setHasChanged(boolean hasChanged);
-	
-	public boolean equals(Object other) {
+
+    @Override
+    public boolean equals(Object other) {
 		if(other instanceof Model) {
 			Model o = (Model) other;
 			return equals(bilddatei, o.bilddatei) &&
@@ -53,6 +66,84 @@ public abstract class Model {
 		return (a == null && b == null) ||
 		a != null && b != null && a.equals(b);
 	}
+
+    private boolean equals(Date a, Date b) {
+		return (a == null && b == null) ||
+		a != null && b != null && a.getTime() == b.getTime();
+	}
+
+    
+    /* Groupable implementation */
+
+    public int compareTo(int attribute, Model o) {
+        int res;
+        switch(attribute) {
+            case HERSTELLER:
+                res = hersteller.compareTo(o.hersteller);
+                break;
+            case HERSTELLERNR:
+                res = herstellerNr.compareTo(o.herstellerNr);
+                break;
+            case AUFLAGE:
+                res = auflage.compareTo(o.auflage);
+                break;
+            case PRODUKTIONSDATUM:
+                res = produktionsdatum.compareTo(o.produktionsdatum);
+                break;
+            case BILDDATEI:
+                res = bilddatei.compareTo(o.bilddatei);
+                break;
+            case MODELLSTANDORT:
+                res = modellStandort.compareTo(o.modellStandort);
+                break;
+            case MARKE:
+                res = marke.compareTo(o.marke);
+                break;
+            case ACHSFOLGE:
+                res = achsfolge.compareTo(o.achsfolge);
+                break;
+            case TYP:
+                res = typ.compareTo(o.typ);
+                break;
+            case AUFBAU:
+                res = aufbau.compareTo(o.aufbau);
+                break;
+            case ART:
+                res = art.compareTo(o.art);
+                break;
+            case DRUCK:
+                res = druck.compareTo(o.druck);
+                break;
+            case PREISEK:
+                res = preisEK.compareTo(o.preisEK);
+                break;
+            case PREISVK:
+                res = preisVK.compareTo(o.preisVK);
+                break;
+            case PREISSL:
+                res = preisSL.compareTo(o.preisSL);
+                break;
+            case MODELLART:
+                res = o.modellArt - modellArt;
+                if(res < 0) {
+                    res = -1;
+                } else if(res > 0) {
+                    res = 1;
+                }
+                break;
+            case AENDERUNGSDATUM:
+                res = aenderungsdatum.compareTo(o.aenderungsdatum);
+                break;
+            default:
+                throw new IllegalArgumentException("Model attribute invalide");
+        }
+        return res;
+    }
+
+    public int getAttributeCount() {
+        return ATTRIBUTE_COUNT;
+    }
+
 	
 	/* Getter and Setter */
 	
@@ -110,11 +201,11 @@ public abstract class Model {
 		this.modellStandort = modellStandort;
 	}
 
-	public String getAenderungsdatum() {
+	public Date getAenderungsdatum() {
 		return aenderungsdatum;
 	}
 
-	public void setAenderungsdatum(String aenderungsdatum) {
+	public void setAenderungsdatum(Date aenderungsdatum) {
 		setHasChanged(true);
 		this.aenderungsdatum = aenderungsdatum;
 	}

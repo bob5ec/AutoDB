@@ -78,4 +78,13 @@ public class Db4oDatabase implements Database, TransientClass {
 		
 	}
 
+    public boolean hasChanged() {
+        boolean res = false;
+        for(Db4oModel m : models) {
+			res = m.hasChanged();
+            if(res == true) break;
+        }
+        return res;
+    }
+
 }

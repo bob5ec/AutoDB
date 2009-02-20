@@ -8,19 +8,17 @@ import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.MainWindow;
 import bz.asd.autodb.gui.SubWindow;
-import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Vector;
 
 public class MainWindowController extends Controller {
 
     private DbViewController dbvc;
-    private Collection<SubWindow> subwindows;
+    private Collection<DbViewController> subwindowController;
 
     public MainWindowController() {
         dbvc = null;
-        subwindows = new LinkedList<SubWindow>();
+        subwindowController = new LinkedList<DbViewController>();
     }
     
     public DbViewController getDbViewController() {
@@ -43,16 +41,16 @@ public class MainWindowController extends Controller {
 
         Database db = new Db4oDatabase(dbName);
         DbViewController newDbvc = new DbViewController(db);
+        newDbvc.setParentFrame(getView());
 
         if(dbvc != null) {
             SubWindow sub = new SubWindow();
             sub.addComponent(newDbvc.getView());
             sub.addCloseListener(newDbvc);
-            subwindows.add(sub);
+            subwindowController.add(newDbvc);
             sub.setVisible(true);
         } else {
             dbvc = newDbvc;
-
         }
         
     }
@@ -64,8 +62,10 @@ public class MainWindowController extends Controller {
      * 3. close db
      */
     public void close() {
-        // todo determine the active Db, which is ment by the user
-        // or move this to DbViewControll
+        // todo checks have to be done in other controller
+        if(dbvc != null && dbvc.isCloseOk()) {
+            dbvc.close();
+        }
     }
 
     /**
