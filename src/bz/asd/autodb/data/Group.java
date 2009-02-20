@@ -1,6 +1,8 @@
 package bz.asd.autodb.data;
 
+import bz.asd.autodb.logic.ModelSort;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  *
  * @author lars
  */
-public class Group<T extends Groupable<? super T>> implements Groupable<Group> {
+public class Group<T extends Groupable<? super T>> implements Groupable<Group<T>> {
     protected List<T> elements;
     private int[] order;
     private int maxGroupLevel, groupLevel;
@@ -34,7 +36,10 @@ public class Group<T extends Groupable<? super T>> implements Groupable<Group> {
         }
 
 
-        if(!openSubgroups) elements.addAll(newElements);
+        if(!openSubgroups) {
+            elements.addAll(newElements);
+            Collections.sort(elements, new ModelSort(order));
+        }
         else {
 
             for(T e : elements) {
@@ -45,19 +50,19 @@ public class Group<T extends Groupable<? super T>> implements Groupable<Group> {
         //TODO sort me
     }
 
-    public int compareTo(int attribute, Group o) {
+    public int compareTo(int attribute, Group<T> o) {
         int res;
         if(groupAttribute == null && o.groupAttribute == null) res = 0;
         else if(groupAttribute == null && o.groupAttribute != null) res = -1;
         else if(groupAttribute != null && o.groupAttribute == null) res = 1;
         else {
-            groupAttribute.compareTo(attribute, o.groupAttribute);
+            res = this.groupAttribute.compareTo(attribute, o.groupAttribute);
         }
         return res;
     }
 
     public int getAttributeCount() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return Model.ATTRIBUTE_COUNT;
     }
 
 }

@@ -6,7 +6,7 @@ package bz.asd.autodb.data;
  * in some attribute and differ in others. These Groupables form a Group.
  * @author lars
  */
-public interface Groupable<T> {
+public interface Groupable<T extends Groupable> {
 
     public int compareTo(int attribute, T o);
     public int getAttributeCount();
