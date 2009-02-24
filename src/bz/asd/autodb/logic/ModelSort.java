@@ -1,13 +1,13 @@
 package bz.asd.autodb.logic;
 
-import bz.asd.autodb.data.Model;
+import bz.asd.autodb.data.Groupable;
 import java.util.Comparator;
 
 /**
  *
  * @author lars
  */
-public class ModelSort implements Comparator<Model> {
+public class ModelSort<T extends Groupable> implements Comparator<T> {
 
     private int[] order;
 
@@ -15,7 +15,7 @@ public class ModelSort implements Comparator<Model> {
         this.order = order;
     }
 
-    public int compare(Model o1, Model o2) {
+    public int compare(T o1, T o2) {
         int res = 0;
         for(int attribute : order) {
             res = o1.compareTo(attribute, o2);
