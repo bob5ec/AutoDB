@@ -11,13 +11,12 @@
 
 package bz.asd.autodb.gui;
 
-import bz.asd.autodb.data.Settings;
 import bz.asd.autodb.logic.MainWindowController;
 import bz.asd.autodb.data.UserSession;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
-import java.io.IOException;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,7 +27,8 @@ public class MainWindow extends javax.swing.JFrame implements View {
     MainWindowController controller;
     UserSession userSession;
 
-    public MainWindow() {
+    public MainWindow(MainWindowController controller) {
+        this.controller = controller;
         initComponents();
     }
 
@@ -38,6 +38,13 @@ public class MainWindow extends javax.swing.JFrame implements View {
 
     public void setController(Controller controller) {
         this.controller = (MainWindowController) controller;
+    }
+
+    public void setDbView(JPanel dbView) {
+        getContentPane().remove(dbView);
+        this.dbView = dbView;
+        getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
+        getContentPane().validate();
     }
 
 
@@ -50,7 +57,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dbView1 = new bz.asd.autodb.gui.DbView();
+        dbView = controller.getDbView();
         jMenuBar1 = new javax.swing.JMenuBar();
         dateiMenu = new javax.swing.JMenu();
         dateiNeuMenuItem = new javax.swing.JMenuItem();
@@ -71,7 +78,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().add(dbView1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
 
         dateiMenu.setText("Datei");
 
@@ -181,7 +188,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
     private javax.swing.JMenu dateiMenu;
     private javax.swing.JMenuItem dateiNeuMenuItem;
     private javax.swing.JMenuItem dateiOeffnenMenuItem;
-    private bz.asd.autodb.gui.DbView dbView1;
+    private javax.swing.JPanel dbView;
     private javax.swing.JMenuItem einfuegenMenuItem;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem kopierenMenuItem;

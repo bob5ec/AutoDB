@@ -6,7 +6,7 @@ import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.DbView;
-import java.awt.Frame;
+import bz.asd.autodb.gui.TreeView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,22 +18,29 @@ public class DbViewController extends Controller implements CloseListener {
 
     private TreeViewController tvc;
 
-    public DbViewController(Database db) {
+    public DbViewController(Database db) throws Exception {
         model = db;
+
+        tvc = new TreeViewController(getModel().getModels());
+        tvc.setParentFrame(parentFrame);
+        getView().setTreeView(tvc.getView());
     }
 
-    public TreeViewController getTreeViewController() {
+    /*public TreeViewController getTreeViewController() {
         if (tvc == null) {
-            GroupTree greouTree = new GroupTree(db);
-            tvc = new TreeViewController(groupTree);
-            tvc.setParentFrame(parentFrame);
+            
         }
         return tvc;
-    }
+    }*/
+
+    /*public TreeView getTreeView() {
+        return tvc.getView();
+    }*/
 
     @Override
     protected View createView() {
-        return new DbView();
+        DbView dbView = new DbView(this);
+        return dbView;
     }
 
     @Override

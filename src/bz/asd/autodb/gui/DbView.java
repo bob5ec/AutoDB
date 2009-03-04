@@ -27,7 +27,8 @@ public class DbView extends javax.swing.JPanel implements View {
     private Database db;
 
     /** Creates new form DbView */
-    public DbView() {
+    public DbView(DbViewController controller) {
+        this.controller = controller;
         initComponents();
     }
 
@@ -37,6 +38,10 @@ public class DbView extends javax.swing.JPanel implements View {
 
     public void setController(Controller controller) {
         this.controller = (DbViewController) controller;
+    }
+
+    public void setTreeView(TreeView treeView) {
+        jSplitPane1.setLeftComponent(treeView);
     }
 
     /** This method is called from within the constructor to
@@ -50,10 +55,8 @@ public class DbView extends javax.swing.JPanel implements View {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         mainPanel = new javax.swing.JPanel();
-        treeView1 = new bz.asd.autodb.gui.TreeView();
 
         jSplitPane1.setDividerSize(3);
-        jSplitPane1.setPreferredSize(null);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -67,7 +70,6 @@ public class DbView extends javax.swing.JPanel implements View {
         );
 
         jSplitPane1.setRightComponent(mainPanel);
-        jSplitPane1.setLeftComponent(treeView1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,7 +80,7 @@ public class DbView extends javax.swing.JPanel implements View {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 1, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +97,6 @@ public class DbView extends javax.swing.JPanel implements View {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel mainPanel;
-    private bz.asd.autodb.gui.TreeView treeView1;
     // End of variables declaration//GEN-END:variables
 
 

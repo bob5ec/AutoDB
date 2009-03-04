@@ -11,10 +11,11 @@
 
 package bz.asd.autodb.gui;
 
+import bz.asd.autodb.data.GroupTree;
+import bz.asd.autodb.logic.TreeViewController;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
-import javax.swing.tree.TreeModel;
 
 /**
  *
@@ -22,17 +23,19 @@ import javax.swing.tree.TreeModel;
  */
 public class TreeView extends javax.swing.JPanel implements View {
 
+    private TreeViewController controller;
+
     /** Creates new form TreeView */
     public TreeView() {
         initComponents();
     }
 
     public void setModel(Model model) {
-        jTree1.setModel((TreeModel) model);
+        jTree1.setModel((GroupTree) model);
     }
 
     public void setController(Controller controller) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.controller = (TreeViewController)controller;
     }
 
     /** This method is called from within the constructor to
@@ -49,7 +52,6 @@ public class TreeView extends javax.swing.JPanel implements View {
         jTree1 = new javax.swing.JTree();
         searchField = new javax.swing.JTextField();
 
-        setPreferredSize(null);
         setLayout(new java.awt.BorderLayout());
         add(scrollControl1, java.awt.BorderLayout.NORTH);
 

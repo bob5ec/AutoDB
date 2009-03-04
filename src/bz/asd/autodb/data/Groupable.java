@@ -10,5 +10,6 @@ public interface Groupable<T extends Groupable> {
 
     public int compareTo(int attribute, T o);
     public int getAttributeCount();
+    public Object getValue(int attribute);
 
 }

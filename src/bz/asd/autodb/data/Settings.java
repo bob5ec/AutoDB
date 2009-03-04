@@ -20,6 +20,7 @@ public class Settings {
     private static Settings instance;
 
     private UserSession userSession;
+    private TreeViewSettings treeViewSettings;
 	
 	private Settings() {
         
@@ -47,24 +48,29 @@ public class Settings {
         FileInputStream is = new FileInputStream(filename);
         XMLDecoder decoder = new XMLDecoder(is);
         userSession = (UserSession)decoder.readObject();
+        treeViewSettings = (TreeViewSettings)decoder.readObject();
         decoder.close();
+    }
+    
+    public void save(String filename) throws IOException {
+        FileOutputStream os = new FileOutputStream(filename);
+        XMLEncoder encoder = new XMLEncoder(os);
+        encoder.writeObject(userSession);
+        encoder.writeObject(treeViewSettings);
+        encoder.close();
     }
 
     public void save() throws IOException {
         save(SETTINGS_FILENAME);
     }
 
-    public void save(String filename) throws IOException {
-        FileOutputStream os = new FileOutputStream(filename);
-        XMLEncoder encoder = new XMLEncoder(os);
-        encoder.writeObject(userSession);
-        encoder.close();
-    }
-	
-	private void setDefaults() {
+    private void setDefaults() {
         String[] lastOpenFiles = new String[LAST_OPEN_FILES_COUNT];
         userSession = new UserSession();
         userSession.setLastOpenFiles(lastOpenFiles);
+        treeViewSettings = new TreeViewSettings();
+        treeViewSettings.setGroupLevel(0);
+        treeViewSettings.setOrder(new int[0]);
     }
 
     public UserSession getUserSession() {
@@ -73,5 +79,15 @@ public class Settings {
 
     public void setUserSession(UserSession userSession) {
         this.userSession = userSession;
+    }
+
+    // TODO add change listener here
+    
+    public TreeViewSettings getTreeViewSettings() {
+        return treeViewSettings;
+    }
+
+    public void setTreeViewSettings(TreeViewSettings treeViewSettings) {
+        this.treeViewSettings = treeViewSettings;
     }
 }

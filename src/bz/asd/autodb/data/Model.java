@@ -9,7 +9,10 @@ public abstract class Model implements Groupable<Model> {
 	public static final int SERIENMODELL=0, WERBEMODELL=1, UMBAU=2;
 
     //todo use this array, when naming attributed in UI
-    //public static String[] attributeNames = {};
+    public static final String[] ATTRIBUTE_NAMES = {"Hersteller", "Hersteller Nr",
+    "Auflage", "Produktionsdatum", "Bild", "Modellstandort", "Marke", "Achsfolge",
+    "Typ", "Aufbau", "Art", "Druck", "Preis EK", "Preis VK", "Preis SL", "Modellart",
+    "Änderungsdatum"};
     public static final int HERSTELLER=0, HERSTELLERNR=1, AUFLAGE=2, PRODUKTIONSDATUM=3,
             BILDDATEI=4, MODELLSTANDORT=5, MARKE=6, ACHSFOLGE=7, TYP=8, AUFBAU=9,
             ART=10, DRUCK=11, PREISEK=12, PREISVK=13, PREISSL=14, MODELLART=15,
@@ -78,51 +81,6 @@ public abstract class Model implements Groupable<Model> {
     public int compareTo(int attribute, Model o) {
         int res;
         switch(attribute) {
-            case HERSTELLER:
-                res = hersteller.compareTo(o.hersteller);
-                break;
-            case HERSTELLERNR:
-                res = herstellerNr.compareTo(o.herstellerNr);
-                break;
-            case AUFLAGE:
-                res = auflage.compareTo(o.auflage);
-                break;
-            case PRODUKTIONSDATUM:
-                res = produktionsdatum.compareTo(o.produktionsdatum);
-                break;
-            case BILDDATEI:
-                res = bilddatei.compareTo(o.bilddatei);
-                break;
-            case MODELLSTANDORT:
-                res = modellStandort.compareTo(o.modellStandort);
-                break;
-            case MARKE:
-                res = marke.compareTo(o.marke);
-                break;
-            case ACHSFOLGE:
-                res = achsfolge.compareTo(o.achsfolge);
-                break;
-            case TYP:
-                res = typ.compareTo(o.typ);
-                break;
-            case AUFBAU:
-                res = aufbau.compareTo(o.aufbau);
-                break;
-            case ART:
-                res = art.compareTo(o.art);
-                break;
-            case DRUCK:
-                res = druck.compareTo(o.druck);
-                break;
-            case PREISEK:
-                res = preisEK.compareTo(o.preisEK);
-                break;
-            case PREISVK:
-                res = preisVK.compareTo(o.preisVK);
-                break;
-            case PREISSL:
-                res = preisSL.compareTo(o.preisSL);
-                break;
             case MODELLART:
                 res = o.modellArt - modellArt;
                 if(res < 0) {
@@ -133,6 +91,71 @@ public abstract class Model implements Groupable<Model> {
                 break;
             case AENDERUNGSDATUM:
                 res = aenderungsdatum.compareTo(o.aenderungsdatum);
+                break;
+            default:
+                res = ((String)getValue(attribute)).compareTo((String)o.getValue(attribute));
+        }
+        return res;
+    }
+
+    /** Workaround, to get the Names for an order, do not use because of bad oo-modeling.
+     * @deprecated
+     * @param attribute the attribute index of the desired value
+     * @return
+     */
+    public Object getValue(int attribute) {
+        Object res;
+        switch(attribute) {
+            case HERSTELLER:
+                res = hersteller;
+                break;
+            case HERSTELLERNR:
+                res = herstellerNr;
+                break;
+            case AUFLAGE:
+                res = auflage;
+                break;
+            case PRODUKTIONSDATUM:
+                res = produktionsdatum;
+                break;
+            case BILDDATEI:
+                res = bilddatei;
+                break;
+            case MODELLSTANDORT:
+                res = modellStandort;
+                break;
+            case MARKE:
+                res = marke;
+                break;
+            case ACHSFOLGE:
+                res = achsfolge;
+                break;
+            case TYP:
+                res = typ;
+                break;
+            case AUFBAU:
+                res = aufbau;
+                break;
+            case ART:
+                res = art;
+                break;
+            case DRUCK:
+                res = druck;
+                break;
+            case PREISEK:
+                res = preisEK;
+                break;
+            case PREISVK:
+                res = preisVK;
+                break;
+            case PREISSL:
+                res = preisSL;
+                break;
+            case MODELLART:
+                res = modellArt;
+                break;
+            case AENDERUNGSDATUM:
+                res = aenderungsdatum;
                 break;
             default:
                 throw new IllegalArgumentException("Model attribute invalide");

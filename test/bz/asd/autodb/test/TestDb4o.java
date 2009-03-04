@@ -20,25 +20,27 @@ import bz.asd.autodb.data.Model;
 
 public class TestDb4o extends TestCase{
 
+    private static final String FILENAME = "test.db4o";
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		(new File("test")).delete();
+		(new File(FILENAME)).delete();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		(new File("test")).delete();
+		(new File(FILENAME)).delete();
 	}
 	
 	public void tearDown() {
-		(new File("test")).delete();
+		(new File(FILENAME)).delete();
 	}
 
 	@Test
 	public void testOpenClose() {
 		Database db = null;
 		try {
-			db = new Db4oDatabase("test");
+			db = new Db4oDatabase(FILENAME);
 			db.open();
 			db.close();
 		} catch (Exception e) { 
@@ -51,7 +53,7 @@ public class TestDb4o extends TestCase{
 	public void testCreateModel() {
 		Database db = null;
 		try {
-			db = new Db4oDatabase("test");
+			db = new Db4oDatabase(FILENAME);
 			db.open();
 			
 			Model model = db.createModel();
@@ -68,7 +70,7 @@ public class TestDb4o extends TestCase{
 	public void testDeleteModel() {
 		Database db = null;
 		try {
-			db = new Db4oDatabase("test");
+			db = new Db4oDatabase(FILENAME);
 			db.open();
 			
 			// delete without saving to disk
@@ -125,7 +127,7 @@ public class TestDb4o extends TestCase{
 	public void testSave() {
 		Database db = null;
 		try {
-			db = new Db4oDatabase("test");
+			db = new Db4oDatabase(FILENAME);
 			db.open();
 
 			Model model = db.createModel();

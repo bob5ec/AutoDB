@@ -1,6 +1,6 @@
 package bz.asd.autodb.data;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * This class represents an open database (file).
@@ -21,7 +21,7 @@ public interface Database extends bz.asd.mvc.Model {
      * false = all changes were saved in the database
      */
     public abstract boolean hasChanged();
-	public abstract Collection<Model> getModels() throws Exception;
+	public abstract List<Model> getModels() throws Exception;
 	public abstract Model createModel() throws Exception;
 	public abstract void deleteModel(Model model) throws Exception;
 }

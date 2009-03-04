@@ -8,21 +8,37 @@ import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.MainWindow;
 import bz.asd.autodb.gui.SubWindow;
-import java.util.Collection;
+import bz.asd.autodb.gui.DbViewPlaceholder;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
 
 public class MainWindowController extends Controller {
 
     private DbViewController dbvc;
-    private Collection<DbViewController> subwindowController;
+    private List<DbViewController> subwindowController; //TODO implement multi dbViews
+    private JPanel dbViewPlaceholder;
 
     public MainWindowController() {
         dbvc = null;
         subwindowController = new LinkedList<DbViewController>();
     }
     
-    public DbViewController getDbViewController() {
-        return dbvc;
+    /*public DbViewController getDbViewController() {
+        return subwindowController.get(0);
+    }*/
+
+    public JPanel getDbView() {
+        JPanel res;
+        if(dbvc == null) {
+            if(dbViewPlaceholder == null) dbViewPlaceholder = new DbViewPlaceholder();
+            res = dbViewPlaceholder;
+        } else {
+            res = dbvc.getView();
+        }
+        return res;
     }
 
     /**
@@ -31,28 +47,31 @@ public class MainWindowController extends Controller {
      * 2. open the chosen Db
      */
 	public void open() {
-
-
         //todo open file chooser
-
         String dbName = "test";
         // switch use database depanding on file extension
         // Server db has an file which contains server,user,pwd,tablename
 
-        Database db = new Db4oDatabase(dbName);
-        DbViewController newDbvc = new DbViewController(db);
-        newDbvc.setParentFrame(getView());
-
-        if(dbvc != null) {
-            SubWindow sub = new SubWindow();
-            sub.addComponent(newDbvc.getView());
-            sub.addCloseListener(newDbvc);
-            subwindowController.add(newDbvc);
-            sub.setVisible(true);
-        } else {
-            dbvc = newDbvc;
+        try {
+            Database db = new Db4oDatabase(dbName);
+            DbViewController newDbvc = new DbViewController(db);
+            newDbvc.setParentFrame(getView());
+            if (dbvc != null) {
+                // open another Window
+                SubWindow sub = new SubWindow();
+                sub.addComponent(newDbvc.getView());
+                sub.addCloseListener(newDbvc);
+                subwindowController.add(newDbvc);
+                sub.setVisible(true);
+            } else {
+                // open DbView in MainWindow
+                dbvc = newDbvc;
+                getView().setDbView(dbvc.getView());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            handleException("Datenbank "+dbName+ " konnte nicht geöffnet werden.", ex);
         }
-        
     }
 
     /**
@@ -66,6 +85,7 @@ public class MainWindowController extends Controller {
         if(dbvc != null && dbvc.isCloseOk()) {
             dbvc.close();
         }
+        dbvc = null;
     }
 
     /**
@@ -98,7 +118,7 @@ public class MainWindowController extends Controller {
     
     @Override
     protected View createView() {
-        MainWindow mw = new MainWindow();
+        MainWindow mw = new MainWindow(this);
         mw.setVisible(true);
         return mw;
     }

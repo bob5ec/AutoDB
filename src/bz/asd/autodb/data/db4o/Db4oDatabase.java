@@ -59,8 +59,8 @@ public class Db4oDatabase implements Database, TransientClass {
 	}
 
 	@Override
-	public Collection<Model> getModels() {
-		return (Collection)models;
+	public List<Model> getModels() {
+		return (List)models; //TODO typecast bug?
 	}
 
 	@Override
