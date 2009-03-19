@@ -16,6 +16,9 @@ import bz.asd.autodb.logic.DbViewController;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
+import java.awt.Container;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -27,10 +30,22 @@ public class DbView extends javax.swing.JPanel implements View {
     private Database db;
 
     /** Creates new form DbView */
-    public DbView(DbViewController controller) {
+    public DbView(DbViewController controller, TreeView treeView, ModelView modelView) {
         this.controller = controller;
+        jSplitPane1.setRightComponent(modelView);
         initComponents();
+        jSplitPane1.setLeftComponent(treeView);
     }
+
+    /*public DbView() {
+        initComponents();
+        TreeView treeView = new TreeView();
+        jSplitPane1.setLeftComponent(treeView);
+        JFrame f = new JFrame();
+        f.getContentPane().add(this);
+        f.pack();
+        f.setVisible(true);
+    }*/
 
     public void setModel(Model model) {
         db = (Database) model;
@@ -42,7 +57,12 @@ public class DbView extends javax.swing.JPanel implements View {
 
     public void setTreeView(TreeView treeView) {
         jSplitPane1.setLeftComponent(treeView);
+        jSplitPane1.validate();
     }
+
+    /*public static void main(String[] args) {
+        new DbView();
+    }*/
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -54,49 +74,16 @@ public class DbView extends javax.swing.JPanel implements View {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
-        mainPanel = new javax.swing.JPanel();
+
+        setLayout(new java.awt.BorderLayout());
 
         jSplitPane1.setDividerSize(3);
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 338, Short.MAX_VALUE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
-        );
-
-        jSplitPane1.setRightComponent(mainPanel);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 
 

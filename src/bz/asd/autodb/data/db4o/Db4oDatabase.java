@@ -1,6 +1,5 @@
 package bz.asd.autodb.data.db4o;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 

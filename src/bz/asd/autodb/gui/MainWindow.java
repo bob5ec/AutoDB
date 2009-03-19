@@ -16,7 +16,9 @@ import bz.asd.autodb.data.UserSession;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
+import java.awt.MenuComponent;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -27,9 +29,11 @@ public class MainWindow extends javax.swing.JFrame implements View {
     MainWindowController controller;
     UserSession userSession;
 
-    public MainWindow(MainWindowController controller) {
+    public MainWindow(MainWindowController controller, JPanel dbView) {
         this.controller = controller;
+        this.dbView = dbView;
         initComponents();
+        initAccelerators();
     }
 
     public void setModel(Model model) {
@@ -41,10 +45,15 @@ public class MainWindow extends javax.swing.JFrame implements View {
     }
 
     public void setDbView(JPanel dbView) {
-        getContentPane().remove(dbView);
+        getContentPane().remove(this.dbView);
         this.dbView = dbView;
         getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
-        getContentPane().validate();
+        //getContentPane().validate();
+        pack();
+    }
+
+    private void initAccelerators() {
+        dateiOeffnenMenuItem.getAccelerator();
     }
 
 
@@ -57,7 +66,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dbView = controller.getDbView();
+        dbView = this.dbView;
         jMenuBar1 = new javax.swing.JMenuBar();
         dateiMenu = new javax.swing.JMenu();
         dateiNeuMenuItem = new javax.swing.JMenuItem();
@@ -72,10 +81,15 @@ public class MainWindow extends javax.swing.JFrame implements View {
         optionenMenu = new javax.swing.JMenu();
         sortierungMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
             }
         });
         getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
@@ -172,6 +186,13 @@ public class MainWindow extends javax.swing.JFrame implements View {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         controller.exit();
     }//GEN-LAST:event_formWindowClosing
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+/*        KeyStroke k = dateiOeffnenMenuItem.getAccelerator();
+        for(MenuComponent comp : dateiMenu.getMenuComponents()) {
+
+        }*/
+    }//GEN-LAST:event_formKeyTyped
 
     /**
     * @param args the command line arguments

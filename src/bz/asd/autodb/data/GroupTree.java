@@ -29,6 +29,9 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model {
      * @return
      */
     public static GroupTree create(List<Groupable> elements, int[] order, int groupLevel) {
+        if(elements.size() == 0) {
+            return new GroupTree(new DefaultMutableTreeNode());
+        }
         // sort elements
         Collections.sort(elements, new ModelSort(order));
 
@@ -40,6 +43,7 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model {
 
         for(int i = 0; i < groupLevel; i++) {
             curNodes[i] = new Group(elements.get(0), order, i-1);
+            if(i>0) curNodes[i-1].add(curNodes[i]);
         }
         curNodes[0].setUserObject(null);
 

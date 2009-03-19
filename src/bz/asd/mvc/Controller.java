@@ -14,16 +14,16 @@ public abstract class Controller {
     protected Model model;
     protected Frame parentFrame;
 
-    public Controller() {
-        view = createView();
+    protected void init() throws Exception {
         model = createModel();
 
+        view = createView();
         view.setModel(model);
         view.setController(this);
     }
 
-    protected abstract View createView();
-    protected abstract Model createModel();
+    protected abstract View createView() throws Exception;
+    protected abstract Model createModel() throws Exception;
 
     public void handleException(String userError, Throwable e) {
         e.printStackTrace();

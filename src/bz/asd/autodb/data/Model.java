@@ -1,10 +1,11 @@
 package bz.asd.autodb.data;
 
+import java.text.DateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Date;
 
-public abstract class Model implements Groupable<Model> {
+public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	
 	public static final int SERIENMODELL=0, WERBEMODELL=1, UMBAU=2;
 
@@ -18,14 +19,15 @@ public abstract class Model implements Groupable<Model> {
             ART=10, DRUCK=11, PREISEK=12, PREISVK=13, PREISSL=14, MODELLART=15,
             AENDERUNGSDATUM=16;
     public static int ATTRIBUTE_COUNT=17;
+    public static final String[] MODELLART_NAMES = { "Serienmodell", "Werbemodell", "Umbau" };
+    public static final String[] MODELLSTANDORT_NAMES = { "Wettmar", "Dinklage" };
     //todo a sort is an int array containig these numbers. the first element
     //in this array is the first arrtibute to sort for
 
 	private String hersteller, herstellerNr, auflage, produktionsdatum,
-	bilddatei, modellStandort,
-	marke, achsfolge, typ, aufbau, art, druck,
+	bilddatei, marke, achsfolge, typ, aufbau, art, druck,
 	preisEK, preisVK, preisSL;
-	private int modellArt;
+	private int modellArt, modellStandort;
     private Date aenderungsdatum;
 	private List<ExtraProperty> extraProperties;
 	
@@ -49,7 +51,7 @@ public abstract class Model implements Groupable<Model> {
 			equals(herstellerNr, o.herstellerNr) &&
 			equals(auflage, o.auflage) &&
 			equals(produktionsdatum, o.produktionsdatum) &&
-			equals(modellStandort, o.modellStandort) &&
+			modellStandort == o.modellStandort &&
 			equals(aenderungsdatum, o.aenderungsdatum) &&
 			equals(marke, o.marke) &&
 			equals(achsfolge, o.achsfolge) &&
@@ -96,6 +98,47 @@ public abstract class Model implements Groupable<Model> {
                 res = ((String)getValue(attribute)).compareTo((String)o.getValue(attribute));
         }
         return res;
+    }
+
+    @Override
+    public String toString() {
+        int[] order = new int[0];
+        //int[] order = new int[ATTRIBUTE_COUNT];
+
+        /*for(int i=0; i<ATTRIBUTE_COUNT; i++) {
+            order[i]=i;
+        }*/
+
+        return toString(order, 0);
+    }
+
+    public String toString(int[] order, int groupLevel) {
+        StringBuffer res = new StringBuffer();
+        
+        for(int i=groupLevel; i<order.length; i++) {
+            String val = getStringValue(order[i]);
+            if(val.length() != 0) res.append(order[i]+"="+val+" ");
+        }
+
+        int notOrdered = ATTRIBUTE_COUNT - order.length;
+        if(notOrdered > 0) {
+            // Java is pesimistic, init with false
+            boolean[] present = new boolean[ATTRIBUTE_COUNT];
+
+            for(int ordered : order) {
+                present[ordered] = true;
+            }
+
+            for(int i=0; i<ATTRIBUTE_COUNT; i++) {
+                if(!present[i]) {
+                    String val = getStringValue(i);
+                    if(val.length() != 0) res.append(" "+i+"="+val);
+                }
+            }
+        }
+
+
+        return res.toString();
     }
 
     /** Workaround, to get the Names for an order, do not use because of bad oo-modeling.
@@ -163,6 +206,34 @@ public abstract class Model implements Groupable<Model> {
         return res;
     }
 
+    /**
+     * @deprecated
+     * @param attribute
+     * @return
+     */
+    public String getStringValue(int attribute) {
+        String res;
+        switch(attribute) {
+            default:
+                Object val = getValue(attribute);
+                if(val != null) res = val.toString();
+                else res = "";
+                break;
+            case MODELLART:
+                res = MODELLART_NAMES[modellArt];
+                break;
+            case MODELLSTANDORT:
+                res = MODELLSTANDORT_NAMES[modellStandort];
+                break;
+            case AENDERUNGSDATUM:
+                if(aenderungsdatum != null) {
+                    res = DateFormat.getDateInstance().format(aenderungsdatum);
+                } else res = "";
+                break;
+        }
+        return res;
+    }
+
     public int getAttributeCount() {
         return ATTRIBUTE_COUNT;
     }
@@ -215,11 +286,11 @@ public abstract class Model implements Groupable<Model> {
 		this.bilddatei = bilddatei;
 	}
 
-	public String getModellStandort() {
+	public int getModellStandort() {
 		return modellStandort;
 	}
 
-	public void setModellStandort(String modellStandort) {
+	public void setModellStandort(int modellStandort) {
 		setHasChanged(true);
 		this.modellStandort = modellStandort;
 	}

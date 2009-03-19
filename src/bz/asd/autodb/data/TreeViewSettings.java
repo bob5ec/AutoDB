@@ -9,10 +9,6 @@ public class TreeViewSettings {
     private int[] order;
     private int groupLevel;
 
-    public TreeViewSettings() {
-
-    }
-
     public int getGroupLevel() {
         return groupLevel;
     }

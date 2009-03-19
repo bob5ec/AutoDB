@@ -30,7 +30,8 @@ public class Group<T extends Groupable<? super T>> extends DefaultMutableTreeNod
     @Override
     public String toString() {
         String s;
-        s = getUserObject().getValue(order[groupLevel]).toString();
+        if(userObject == null) s = "";
+        else s = getUserObject().getValue(order[groupLevel]).toString();
         return s;
     }
 

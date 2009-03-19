@@ -16,6 +16,8 @@ import bz.asd.autodb.logic.TreeViewController;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -26,7 +28,8 @@ public class TreeView extends javax.swing.JPanel implements View {
     private TreeViewController controller;
 
     /** Creates new form TreeView */
-    public TreeView() {
+    public TreeView(Controller controller) {
+        setController(controller);
         initComponents();
     }
 
@@ -36,6 +39,8 @@ public class TreeView extends javax.swing.JPanel implements View {
 
     public void setController(Controller controller) {
         this.controller = (TreeViewController)controller;
+        //always null...
+        //if(jTree1 != null) ((GroupTreeView)jTree1).setController(this.controller);
     }
 
     /** This method is called from within the constructor to
@@ -49,17 +54,46 @@ public class TreeView extends javax.swing.JPanel implements View {
 
         scrollControl1 = new bz.asd.autodb.gui.ScrollControl();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jTree1 = new GroupTreeView(controller);
         searchField = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
         add(scrollControl1, java.awt.BorderLayout.NORTH);
 
+        jTree1.setRootVisible(false);
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTree1MousePressed(evt);
+            }
+        });
+        jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jTree1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
 
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
         add(searchField, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTree1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MousePressed
+        // change jTree expansion event from double click to single click
+        TreePath oldPath = jTree1.getPathForLocation(evt.getX(), evt.getY());
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)oldPath.getLastPathComponent();
+        if(!node.isLeaf()) {
+            TreePath newPath = oldPath.pathByAddingChild(node.getChildAt(0));
+            jTree1.scrollPathToVisible(newPath);
+        }
+    }//GEN-LAST:event_jTree1MousePressed
+
+    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode)evt.getPath().getLastPathComponent();
+        if(node.isLeaf()) {
+            System.out.println("display "+node);
+            controller.treeSelectLeaf(node);
+        }
+    }//GEN-LAST:event_jTree1ValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

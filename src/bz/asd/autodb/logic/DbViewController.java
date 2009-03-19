@@ -1,12 +1,10 @@
 package bz.asd.autodb.logic;
 
 import bz.asd.autodb.data.Database;
-import bz.asd.autodb.data.GroupTree;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.DbView;
-import bz.asd.autodb.gui.TreeView;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,13 +15,11 @@ import java.util.logging.Logger;
 public class DbViewController extends Controller implements CloseListener {
 
     private TreeViewController tvc;
+    private ModelViewController mvc;
 
     public DbViewController(Database db) throws Exception {
         model = db;
-
-        tvc = new TreeViewController(getModel().getModels());
-        tvc.setParentFrame(parentFrame);
-        getView().setTreeView(tvc.getView());
+        init();
     }
 
     /*public TreeViewController getTreeViewController() {
@@ -38,8 +34,14 @@ public class DbViewController extends Controller implements CloseListener {
     }*/
 
     @Override
-    protected View createView() {
-        DbView dbView = new DbView(this);
+    protected View createView() throws Exception {
+        mvc = new ModelViewController();
+        mvc.setParentFrame(parentFrame);
+
+        tvc = new TreeViewController(getModel().getModels(), mvc);
+        tvc.setParentFrame(parentFrame);
+
+        DbView dbView = new DbView(this, tvc.getView(), mvc.getView());
         return dbView;
     }
 
@@ -65,17 +67,21 @@ public class DbViewController extends Controller implements CloseListener {
      * @return
      */
     public boolean isCloseOk() {
-        boolean ok;
+        boolean ok = false;
         if(getModel().hasChanged()) {
             //todo prompt user for saving or loosing unsaved changes
-
-            try {
-                getModel().save();
-            } catch (Exception ex) {
-                handleException("Fehler beim speichern der Daten.", ex);
-                Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            //ok = okCancle.getResult()
             ok = true;
+            
+            if(ok) {
+                try {
+                    getModel().save();
+                } catch (Exception ex) {
+                    ok = false;
+                    handleException("Fehler beim speichern der Daten.", ex);
+                    Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } else {
             ok = true;
         }

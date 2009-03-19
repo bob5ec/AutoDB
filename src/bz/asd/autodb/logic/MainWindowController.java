@@ -9,37 +9,36 @@ import bz.asd.mvc.View;
 import bz.asd.autodb.gui.MainWindow;
 import bz.asd.autodb.gui.SubWindow;
 import bz.asd.autodb.gui.DbViewPlaceholder;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 public class MainWindowController extends Controller {
 
     private DbViewController dbvc;
     private List<DbViewController> subwindowController; //TODO implement multi dbViews
-    private JPanel dbViewPlaceholder;
 
-    public MainWindowController() {
+    public MainWindowController() throws Exception {
         dbvc = null;
         subwindowController = new LinkedList<DbViewController>();
+        init();
     }
     
     /*public DbViewController getDbViewController() {
         return subwindowController.get(0);
     }*/
 
-    public JPanel getDbView() {
+    /*public JPanel getDbView() {
         JPanel res;
         if(dbvc == null) {
-            if(dbViewPlaceholder == null) dbViewPlaceholder = new DbViewPlaceholder();
             res = dbViewPlaceholder;
         } else {
             res = dbvc.getView();
         }
         return res;
-    }
+    }*/
 
     /**
      * User want's to open the Db.
@@ -48,12 +47,13 @@ public class MainWindowController extends Controller {
      */
 	public void open() {
         //todo open file chooser
-        String dbName = "test";
+        String dbName = "test.db4o";
         // switch use database depanding on file extension
         // Server db has an file which contains server,user,pwd,tablename
 
         try {
             Database db = new Db4oDatabase(dbName);
+            db.open();
             DbViewController newDbvc = new DbViewController(db);
             newDbvc.setParentFrame(getView());
             if (dbvc != null) {
@@ -75,17 +75,29 @@ public class MainWindowController extends Controller {
     }
 
     /**
-     * User want's to close the Db.
+     * User want's to close the (main) Db.
      * 1. check if all Items of the Db are saved
      * 2. prompt user for saving or loosing unsaved changes
      * 3. close db
      */
-    public void close() {
+    public boolean close() {
+        boolean res;
+        /* IMPROVE multiple DbViews
+        for(DbViewController subWindow : subwindowController) {
+            if(! subWindow.isCloseOk()) return; // do not exit
+        }
+
+        for(DbViewController subWindow : subwindowController) {
+            subWindow.close();
+        }*/
         // todo checks have to be done in other controller
         if(dbvc != null && dbvc.isCloseOk()) {
             dbvc.close();
-        }
-        dbvc = null;
+            dbvc = null;
+            res = true;
+        } else res = dbvc == null;
+
+        return res;
     }
 
     /**
@@ -111,14 +123,29 @@ public class MainWindowController extends Controller {
      * 2. react on result
      */
     public void exit() {
-		System.exit(0);
+        if(close()) {
+            try {
+                //int[] order = new int[1];
+                //order[0] = bz.asd.autodb.data.Model.DRUCK;
+                //Settings.getInstance().getTreeViewSettings().setOrder(order);
+                //Settings.getInstance().getTreeViewSettings().setGroupLevel(1);
+                Settings.getInstance().save();
+                System.exit(0);
+            } catch (IOException ex) {
+                handleException("Die Einstellungen konnten nicht gespeichert werden.", ex);
+                // TODO "Wollen sie trozdem das Programm beenden?" einfügen
+                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+
+        }
 	}
 
     /* Controller implementation */
     
     @Override
     protected View createView() {
-        MainWindow mw = new MainWindow(this);
+        MainWindow mw = new MainWindow(this, new DbViewPlaceholder());
         mw.setVisible(true);
         return mw;
     }

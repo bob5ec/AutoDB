@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_12" class="java.beans.XMLDecoder"> 
+ <object class="bz.asd.autodb.data.UserSession"> 
+  <void property="lastOpenFiles"> 
+   <array class="java.lang.String" length="5"/> 
+  </void> 
+ </object> 
+ <object class="bz.asd.autodb.data.TreeViewSettings"> 
+  <void property="groupLevel"> 
+   <int>1</int> 
+  </void> 
+  <void property="order"> 
+   <array class="int" length="1"> 
+    <void index="0"> 
+     <int>11</int> 
+    </void> 
+   </array> 
+  </void> 
+ </object> 
+</java> 

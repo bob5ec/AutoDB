@@ -28,6 +28,7 @@ public class Settings {
             try {
                 load();
             } catch (FileNotFoundException fnfe) {
+                System.out.println("No config file found, setting defaults.");
                 setDefaults();
             }
         } catch(Exception e) {
