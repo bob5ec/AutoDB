@@ -8,7 +8,7 @@ import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.MainWindow;
 import bz.asd.autodb.gui.SubWindow;
-import bz.asd.autodb.gui.DbViewPlaceholder;
+import bz.asd.autodb.gui.ViewPlaceholder;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -145,7 +145,7 @@ public class MainWindowController extends Controller {
     
     @Override
     protected View createView() {
-        MainWindow mw = new MainWindow(this, new DbViewPlaceholder());
+        MainWindow mw = new MainWindow(this, new ViewPlaceholder(400,300));
         mw.setVisible(true);
         return mw;
     }

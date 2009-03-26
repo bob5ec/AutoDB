@@ -1,19 +1,16 @@
 package bz.asd.autodb.data.db4o;
 
 import bz.asd.autodb.data.DbSupport;
-import bz.asd.autodb.data.Model;
+import bz.asd.autodb.data.DefaultModel;
 
-public class Db4oModel extends Model implements DbSupport {
+public class Db4oModel extends DefaultModel implements DbSupport {
 	
-	private boolean hasChanged;
-
 	public Db4oModel() {
 		super();
 	}
 	
 	protected void init() {
 		super.init();
-		hasChanged = false;
 	}
 
 	@Override
@@ -33,14 +30,4 @@ public class Db4oModel extends Model implements DbSupport {
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	protected void setHasChanged(boolean hasChanged) {
-		this.hasChanged = hasChanged;
-	}
-	
-	protected boolean hasChanged() {
-		return hasChanged;
-	}
-
 }

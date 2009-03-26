@@ -30,22 +30,12 @@ public class DbView extends javax.swing.JPanel implements View {
     private Database db;
 
     /** Creates new form DbView */
-    public DbView(DbViewController controller, TreeView treeView, ModelView modelView) {
+    public DbView(DbViewController controller, TreeView treeView, Container modelView) {
         this.controller = controller;
-        jSplitPane1.setRightComponent(modelView);
         initComponents();
+        jSplitPane1.setRightComponent(modelView);
         jSplitPane1.setLeftComponent(treeView);
     }
-
-    /*public DbView() {
-        initComponents();
-        TreeView treeView = new TreeView();
-        jSplitPane1.setLeftComponent(treeView);
-        JFrame f = new JFrame();
-        f.getContentPane().add(this);
-        f.pack();
-        f.setVisible(true);
-    }*/
 
     public void setModel(Model model) {
         db = (Database) model;
@@ -78,6 +68,7 @@ public class DbView extends javax.swing.JPanel implements View {
         setLayout(new java.awt.BorderLayout());
 
         jSplitPane1.setDividerSize(3);
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(400, 300));
         add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

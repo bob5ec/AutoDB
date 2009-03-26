@@ -19,11 +19,12 @@ import bz.asd.mvc.View;
  *
  * @author lars
  */
-public class DbViewPlaceholder extends javax.swing.JPanel implements View {
+public class ViewPlaceholder extends javax.swing.JPanel implements View {
 
     /** Creates new form DbViewPlaceholder */
-    public DbViewPlaceholder() {
+    public ViewPlaceholder(int sizeX, int sizeY) {
         initComponents();
+        setMinimumSize(new java.awt.Dimension(sizeX, sizeY));
     }
 
     public void setModel(Model model) {
@@ -42,8 +43,6 @@ public class DbViewPlaceholder extends javax.swing.JPanel implements View {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        setMinimumSize(new java.awt.Dimension(400, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

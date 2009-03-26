@@ -48,8 +48,10 @@ public class MainWindow extends javax.swing.JFrame implements View {
         getContentPane().remove(this.dbView);
         this.dbView = dbView;
         getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
+        getContentPane().validate();
+        //repaint();
         //getContentPane().validate();
-        pack();
+        //pack();
     }
 
     private void initAccelerators() {

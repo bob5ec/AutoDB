@@ -92,6 +92,9 @@ public class TreeView extends javax.swing.JPanel implements View {
         if(node.isLeaf()) {
             System.out.println("display "+node);
             controller.treeSelectLeaf(node);
+        } else {
+            System.out.println("display group: "+node);
+            controller.treeSelectInnerNode(node);
         }
     }//GEN-LAST:event_jTree1ValueChanged
 

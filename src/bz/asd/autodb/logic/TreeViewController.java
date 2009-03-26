@@ -55,6 +55,10 @@ public class TreeViewController extends Controller {
         selectModel((Model)leaf.getUserObject());
     }
 
+    public void treeSelectInnerNode(DefaultMutableTreeNode node) {
+        selectModel((Model)node.getUserObject());
+    }
+
     private void selectModel(Model model) {
         modelView.setModel(model);
     }

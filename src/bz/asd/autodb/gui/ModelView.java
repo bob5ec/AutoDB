@@ -12,9 +12,11 @@
 package bz.asd.autodb.gui;
 
 import bz.asd.mvc.Controller;
+import bz.asd.autodb.data.DefaultModel;
 import bz.asd.autodb.data.Model;
 import bz.asd.autodb.logic.ModelViewController;
 import bz.asd.mvc.View;
+import org.jdesktop.beansbinding.Binding;
 
 /**
  *
@@ -22,19 +24,29 @@ import bz.asd.mvc.View;
  */
 public class ModelView extends javax.swing.JPanel implements View {
 
-    private Model model;
     private ModelViewController controller;
 
-    /** Creates new form ModelView */
+    /** Creates new empty ModelView which can be used independently
+     * for Model GUI IO.
+     */
     public ModelView() {
-        
+        initComponents();
     }
 
     public void setModel(bz.asd.mvc.Model model) {
         System.out.println("TADA!!!");
-        this.model = (Model) model;
-        if(model != null) initComponents();
-        //TODO Beans Binding
+        
+        this.model = (DefaultModel) model;
+
+        for(Binding binding : bindingGroup.getBindings()) {
+            binding.unbind();
+            binding.setSourceObject(model);
+            binding.bind();
+        }
+    }
+
+    public Model getModel() {
+        return model;
     }
 
     public void setController(Controller controller) {
@@ -49,21 +61,51 @@ public class ModelView extends javax.swing.JPanel implements View {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+
+        model = new bz.asd.autodb.data.DefaultModel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+
+        setMinimumSize(new java.awt.Dimension(300, 300));
+
+        jLabel1.setText("Hersteller");
+
+        jTextField1.setMinimumSize(new java.awt.Dimension(60, 21));
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, model, org.jdesktop.beansbinding.ELProperty.create("${hersteller}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(267, Short.MAX_VALUE))
         );
+
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTextField1;
+    private bz.asd.autodb.data.DefaultModel model;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
 }
