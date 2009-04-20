@@ -23,23 +23,36 @@ public class DbViewController extends Controller implements CloseListener {
         init();
     }
 
-    /*public TreeViewController getTreeViewController() {
-        if (tvc == null) {
-            
+    /**
+     * User wants to add a new Model to the displayed Db
+     */
+    public void addModel() {
+        try {
+            getModel().createModel(); //Displayes are notified via Database
+        } catch (Exception ex) {
+            handleException("Fehler beim Anlegen des Modells.", ex);
+            Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return tvc;
-    }*/
+    }
 
-    /*public TreeView getTreeView() {
-        return tvc.getView();
-    }*/
+    /**
+     * User wants to delete the current displayed Model
+     */
+    public void deleteModel() {
+        try {
+            getModel().deleteModel(mvc.getModel()); //Displayes are notified via Database
+        } catch (Exception ex) {
+            handleException("Fehler beim Anlegen des Modells.", ex);
+            Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     protected View createView() throws Exception {
         mvc = new ModelViewController();
         mvc.setParentFrame(parentFrame);
 
-        tvc = new TreeViewController(getModel().getModels(), mvc);
+        tvc = new TreeViewController(getModel(), mvc);
         tvc.setParentFrame(parentFrame);
 
         DbView dbView = new DbView(this, tvc.getView(), mvc.getView());

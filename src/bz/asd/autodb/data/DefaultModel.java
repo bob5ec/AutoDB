@@ -17,13 +17,17 @@ public class DefaultModel extends Model {
         hasChanged = false;
     }
     
-    @Override
-	public void setHasChanged(boolean hasChanged) {
+    public void setHasChanged(boolean hasChanged) {
 		this.hasChanged = hasChanged;
 	}
 
     public boolean hasChanged() {
 		return hasChanged;
 	}
+
+    @Override
+    protected void notifyChangeListener() {
+        setHasChanged(true);
+    }
 
 }

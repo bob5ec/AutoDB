@@ -1,5 +1,6 @@
 package bz.asd.autodb.data;
 
+import bz.asd.autodb.logic.ModelSort;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -31,7 +32,13 @@ public class Group<T extends Groupable<? super T>> extends DefaultMutableTreeNod
     public String toString() {
         String s;
         if(userObject == null) s = "";
-        else s = getUserObject().getValue(order[groupLevel]).toString();
+        else {
+            Object obj = getUserObject().getValue(order[groupLevel]);
+            if(obj == null) s = "";
+            else {
+                s=obj.toString();
+            }
+        }
         return s;
     }
 
@@ -51,6 +58,19 @@ public class Group<T extends Groupable<? super T>> extends DefaultMutableTreeNod
         return compareToElement(attribute, o.getUserObject());
     }
 
+    public int getCommonPrefix(T o) {
+        int res;
+
+        for(res=0; res<=groupLevel; res++) {
+            if(compareToElement(order[res], o) != 0) {
+                res--; // last one was not common
+                break;
+            }
+        }
+
+        return res;
+    }
+
     public int getAttributeCount() {
         return Model.ATTRIBUTE_COUNT;
     }
@@ -58,5 +78,4 @@ public class Group<T extends Groupable<? super T>> extends DefaultMutableTreeNod
     public Object getValue(int attribute) {
         return getUserObject().getValue(attribute);
     }
-
 }

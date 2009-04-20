@@ -39,8 +39,7 @@ public class ModelViewController extends Controller {
     @Override
     protected View createView() throws Exception {
         //TODO @see createModel
-        //DEBUGreturn new ViewContainer(400, 300);
-        return new TestPanel();
+        return new ViewContainer(400, 300);
     }
 
     @Override

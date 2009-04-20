@@ -58,6 +58,7 @@
         <Menu class="javax.swing.JMenu" name="modellMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Modell"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="modellNeuMenuItem">
@@ -67,6 +68,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Neu"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modellNeuMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="loeschenMenuItem">
               <Properties>
@@ -75,6 +79,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loeschenMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="kopierenMenuItem">
               <Properties>

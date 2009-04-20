@@ -67,6 +67,8 @@ public class MainWindowController extends Controller {
                 // open DbView in MainWindow
                 dbvc = newDbvc;
                 getView().setDbView(dbvc.getView());
+                getView().setDbViewController(newDbvc);
+                getView().setDbMenuEnabled(true);
             }
         } catch (Exception ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);

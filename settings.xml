@@ -10,11 +10,7 @@
    <int>1</int> 
   </void> 
   <void property="order"> 
-   <array class="int" length="1"> 
-    <void index="0"> 
-     <int>11</int> 
-    </void> 
-   </array> 
+   <array class="int" length="1"/> 
   </void> 
  </object> 
 </java> 

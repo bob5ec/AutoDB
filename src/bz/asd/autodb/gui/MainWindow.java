@@ -13,6 +13,7 @@ package bz.asd.autodb.gui;
 
 import bz.asd.autodb.logic.MainWindowController;
 import bz.asd.autodb.data.UserSession;
+import bz.asd.autodb.logic.DbViewController;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
@@ -27,6 +28,7 @@ import javax.swing.KeyStroke;
 public class MainWindow extends javax.swing.JFrame implements View {
 
     MainWindowController controller;
+    DbViewController dbvc;
     UserSession userSession;
 
     public MainWindow(MainWindowController controller, JPanel dbView) {
@@ -44,6 +46,10 @@ public class MainWindow extends javax.swing.JFrame implements View {
         this.controller = (MainWindowController) controller;
     }
 
+    public void setDbViewController(DbViewController controller) {
+        dbvc = controller;
+    }
+
     public void setDbView(JPanel dbView) {
         getContentPane().remove(this.dbView);
         this.dbView = dbView;
@@ -52,6 +58,10 @@ public class MainWindow extends javax.swing.JFrame implements View {
         //repaint();
         //getContentPane().validate();
         //pack();
+    }
+
+    public void setDbMenuEnabled(boolean enabled) {
+        modellMenu.setEnabled(enabled);
     }
 
     private void initAccelerators() {
@@ -137,13 +147,24 @@ public class MainWindow extends javax.swing.JFrame implements View {
         jMenuBar1.add(dateiMenu);
 
         modellMenu.setText("Modell");
+        modellMenu.setEnabled(false);
 
         modellNeuMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         modellNeuMenuItem.setText("Neu");
+        modellNeuMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modellNeuMenuItemActionPerformed(evt);
+            }
+        });
         modellMenu.add(modellNeuMenuItem);
 
         loeschenMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, java.awt.event.InputEvent.CTRL_MASK));
         loeschenMenuItem.setText("Löschen");
+        loeschenMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loeschenMenuItemActionPerformed(evt);
+            }
+        });
         modellMenu.add(loeschenMenuItem);
 
         kopierenMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
@@ -195,6 +216,14 @@ public class MainWindow extends javax.swing.JFrame implements View {
 
         }*/
     }//GEN-LAST:event_formKeyTyped
+
+    private void modellNeuMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modellNeuMenuItemActionPerformed
+        dbvc.addModel();
+    }//GEN-LAST:event_modellNeuMenuItemActionPerformed
+
+    private void loeschenMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loeschenMenuItemActionPerformed
+        dbvc.deleteModel();
+    }//GEN-LAST:event_loeschenMenuItemActionPerformed
 
     /**
     * @param args the command line arguments

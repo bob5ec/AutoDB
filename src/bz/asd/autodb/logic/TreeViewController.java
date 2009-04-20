@@ -1,5 +1,6 @@
 package bz.asd.autodb.logic;
 
+import bz.asd.autodb.data.Database;
 import bz.asd.autodb.data.GroupTree;
 import bz.asd.autodb.data.Groupable;
 import bz.asd.autodb.data.Group;
@@ -9,7 +10,6 @@ import bz.asd.mvc.Controller;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.TreeView;
 import bz.asd.autodb.data.Model;
-import java.awt.Container;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -19,12 +19,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
  */
 public class TreeViewController extends Controller {
 
+    private Database db;
     private TreeViewSettings tvs;
     private List<Groupable> models;
     private ModelViewController modelView;
 
-    public TreeViewController(List<Model> models, ModelViewController modelView) throws Exception {
-        this.models = (List)models;
+    public TreeViewController(Database db, ModelViewController modelView) throws Exception {
+        this.db = db;
+        this.models = (List) db.getModels();
         this.modelView = modelView;
         tvs = Settings.getInstance().getTreeViewSettings();
 
@@ -70,7 +72,9 @@ public class TreeViewController extends Controller {
 
     @Override
     protected bz.asd.mvc.Model createModel() {
-        return GroupTree.create(models, tvs.getOrder(), tvs.getGroupLevel());
+        GroupTree tree = GroupTree.create(models, tvs.getOrder(), tvs.getGroupLevel());
+        db.addDbContentListener(tree);
+        return tree;
     }
 
     @Override

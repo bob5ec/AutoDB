@@ -39,7 +39,9 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 		extraProperties = new LinkedList<ExtraProperty>();
 	}
 	
-	protected abstract void setHasChanged(boolean hasChanged);
+	//protected abstract void setHasChanged(boolean hasChanged);
+
+    protected abstract void notifyChangeListener();
 
     @Override
     public boolean equals(Object other) {
@@ -81,6 +83,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
     /* Groupable implementation */
 
     public int compareTo(int attribute, Model o) {
+        if(o == null) return -1;
+        
         int res;
         switch(attribute) {
             case MODELLART:
@@ -95,7 +99,14 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
                 res = aenderungsdatum.compareTo(o.aenderungsdatum);
                 break;
             default:
-                res = ((String)getValue(attribute)).compareTo((String)o.getValue(attribute));
+                String val = ((String)getValue(attribute));
+                String val2 = (String)o.getValue(attribute);
+                if(val == null && val2 == null) res = 0;
+                else {
+                    if (val == null) res = -1;
+                    else if (val2 == null) res = 1;
+                    else res = val.compareTo(val2);
+                }
         }
         return res;
     }
@@ -246,7 +257,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setHersteller(String hersteller) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.hersteller = hersteller;
 	}
 
@@ -255,7 +266,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setHerstellerNr(String herstellerNr) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.herstellerNr = herstellerNr;
 	}
 
@@ -264,7 +275,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAuflage(String auflage) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.auflage = auflage;
 	}
 
@@ -273,7 +284,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setProduktionsdatum(String produktionsdatum) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.produktionsdatum = produktionsdatum;
 	}
 
@@ -282,7 +293,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setBilddatei(String bilddatei) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.bilddatei = bilddatei;
 	}
 
@@ -291,7 +302,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setModellStandort(int modellStandort) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.modellStandort = modellStandort;
 	}
 
@@ -300,7 +311,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAenderungsdatum(Date aenderungsdatum) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.aenderungsdatum = aenderungsdatum;
 	}
 
@@ -309,7 +320,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setMarke(String marke) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.marke = marke;
 	}
 
@@ -318,7 +329,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAchsfolge(String achsfolge) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.achsfolge = achsfolge;
 	}
 
@@ -327,7 +338,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setTyp(String typ) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.typ = typ;
 	}
 
@@ -336,7 +347,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAufbau(String aufbau) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.aufbau = aufbau;
 	}
 
@@ -345,7 +356,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setArt(String art) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.art = art;
 	}
 
@@ -354,7 +365,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setDruck(String druck) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.druck = druck;
 	}
 
@@ -363,7 +374,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setPreisEK(String preisEK) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.preisEK = preisEK;
 	}
 
@@ -372,7 +383,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setPreisVK(String preisVK) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.preisVK = preisVK;
 	}
 
@@ -381,7 +392,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setPreisSL(String preisSL) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.preisSL = preisSL;
 	}
 
@@ -390,7 +401,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setModellArt(int modellArt) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.modellArt = modellArt;
 	}
 
@@ -399,7 +410,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setExtraProperties(List<ExtraProperty> extraProperties) {
-		setHasChanged(true);
+		notifyChangeListener();
 		this.extraProperties = extraProperties;
 	}
 }

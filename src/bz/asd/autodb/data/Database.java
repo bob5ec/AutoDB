@@ -24,4 +24,5 @@ public interface Database extends bz.asd.mvc.Model {
 	public abstract List<Model> getModels() throws Exception;
 	public abstract Model createModel() throws Exception;
 	public abstract void deleteModel(Model model) throws Exception;
+    public abstract void addDbContentListener(CollectionChangeListener listener);
 }
