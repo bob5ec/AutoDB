@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
+import java.util.Comparator;
 
 /**
  *
@@ -91,56 +92,6 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
             ancester = child;
         }
         insertSorted(ancester, new DefaultMutableTreeNode(element));
-/*
-        // find exact position of the new element in the leafs of the tree
-        ModelSort sort = new ModelSort(order);
-        DefaultMutableTreeNode lastMatch = null, firstLeaf = null;
-        Groupable lastMatchModel = null;
-
-        Enumeration<DefaultMutableTreeNode> nodes= root.depthFirstEnumeration();
-        while(nodes.hasMoreElements()) {
-            DefaultMutableTreeNode node = nodes.nextElement();
-            if(!node.isLeaf()) continue;
-
-            // for all leafs do:
-            if(firstLeaf == null) firstLeaf = node;
-            Groupable model = (Groupable)node.getUserObject();
-            if(sort.compare(model, element) <= 0) {
-                lastMatch = node;
-                lastMatchModel = model;
-            } else {
-                break; // the tree is sorted --> no other match possible
-            }
-        }
-
-        // find prefix that exists in the tree for this element
-        int commonPrefixLevel = 0;
-        for(int i = groupLevel; i>=0 && commonPrefixLevel == 0; i--) {
-            
-            if(comparePrefixTo(lastMatchModel, element, i) != 0) {
-                commonPrefixLevel = i;
-            }
-        }
-
-        // create empty branch from the point on where it's nessesery
-        DefaultMutableTreeNode[] matchPath;
-
-        if(lastMatch == null) {
-            // special case if new element ist the first leaf in the new tree
-            matchPath = (DefaultMutableTreeNode[])firstLeaf.getPath();
-
-        } else {
-            matchPath = (DefaultMutableTreeNode[])lastMatch.getPath();
-        }
-
-        
-        
-        for(int i=commonPrefixLevel; i<groupLevel; i++) {
-            matchPath[i] = new Group(element, order, i);
-            matchPath[i-1]
-            matchPath[i-1].insert(matchPath[i], );
-        }
-        matchPath[groupLevel].add(new DefaultMutableTreeNode(element));*/
     }
 
     /**
@@ -187,19 +138,65 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
     }
 
     public void deleted(Groupable element) {
-        //throw new UnsupportedOperationException("Not supported yet.");
         System.out.println("GroupTree: deleted "+element);
+        // find node
+        DefaultMutableTreeNode node = getNodeRef(element);
+        // remove all ancesters which have no child after removal
+        TreeNode[] path = node.getPath();
+
+        removeNodeFromParent((DefaultMutableTreeNode)path[path.length-1]);
+        // remove empty inner nodes, not leaf and root
+        for(int i=path.length-2; i>0; i--) {
+            if(path[i].getChildCount() != 0) break;
+            removeNodeFromParent((DefaultMutableTreeNode)path[i]);
+        }
+
     }
 
     public void changed(Groupable element) {
-        //throw new UnsupportedOperationException("Not supported yet.");
         System.out.println("GroupTree: changed "+element);
+        // find oldElement in tree (via ==)
+        DefaultMutableTreeNode oldNode = getNodeRef(element);
+        // check if element has the same path as oldElement
+        DefaultMutableTreeNode node = getExistingMatchingAncester(element);
+
+        Object[] pathNode = node.getUserObjectPath();
+        Object[] pathOldNode = oldNode.getUserObjectPath();
+        boolean samePath = pathNode.length == pathOldNode.length;
+        for(int i=0; i<pathNode.length && samePath; i++) {
+            samePath = pathNode[i] == pathOldNode[i];
+        }
+        if(samePath) return; // path is the same, we don't have to change the tree
+
+        // remove oldElement
+        deleted(element);
+        // insert element
+        added(element);
     }
 
     private int comparePrefixTo(Groupable g1, Groupable g2, int prefixLength) {
         int res = 0;
         for(int i = prefixLength; i>=0 && res == 0; i--) {
             res = g1.compareTo(order[i], g2);
+        }
+        return res;
+    }
+
+    /**
+     * Find the node which has a reference to the element as userObject.
+     * @param element
+     * @return
+     */
+    public DefaultMutableTreeNode getNodeRef(Groupable element) {
+        //IMPROVE binary search using ordered Tree
+        DefaultMutableTreeNode res = null;
+        Enumeration<DefaultMutableTreeNode> nodes= getRoot().depthFirstEnumeration();
+        while(nodes.hasMoreElements()) {
+            DefaultMutableTreeNode node = nodes.nextElement();
+
+            if(node.isLeaf()) {
+                if(element == node.getUserObject()) res = node;
+            }
         }
         return res;
     }
