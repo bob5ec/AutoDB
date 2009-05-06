@@ -105,7 +105,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
                 else {
                     if (val == null) res = -1;
                     else if (val2 == null) res = 1;
-                    else res = val.compareTo(val2);
+                    else res = val.compareToIgnoreCase(val2);
                 }
         }
         return res;
@@ -257,8 +257,9 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setHersteller(String hersteller) {
-		notifyChangeListener();
 		this.hersteller = hersteller;
+        notifyChangeListener();
+        // TODO switch all changeListener positions
 	}
 
 	public String getHerstellerNr() {
@@ -266,8 +267,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setHerstellerNr(String herstellerNr) {
-		notifyChangeListener();
 		this.herstellerNr = herstellerNr;
+        notifyChangeListener();
 	}
 
 	public String getAuflage() {
@@ -275,8 +276,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAuflage(String auflage) {
-		notifyChangeListener();
 		this.auflage = auflage;
+        notifyChangeListener();
 	}
 
 	public String getProduktionsdatum() {
@@ -284,8 +285,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setProduktionsdatum(String produktionsdatum) {
-		notifyChangeListener();
 		this.produktionsdatum = produktionsdatum;
+        notifyChangeListener();
 	}
 
 	public String getBilddatei() {
@@ -293,8 +294,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setBilddatei(String bilddatei) {
-		notifyChangeListener();
 		this.bilddatei = bilddatei;
+        notifyChangeListener();
 	}
 
 	public int getModellStandort() {
@@ -302,8 +303,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setModellStandort(int modellStandort) {
-		notifyChangeListener();
 		this.modellStandort = modellStandort;
+        notifyChangeListener();
 	}
 
 	public Date getAenderungsdatum() {
@@ -311,8 +312,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAenderungsdatum(Date aenderungsdatum) {
-		notifyChangeListener();
 		this.aenderungsdatum = aenderungsdatum;
+        notifyChangeListener();
 	}
 
 	public String getMarke() {
@@ -320,8 +321,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setMarke(String marke) {
-		notifyChangeListener();
 		this.marke = marke;
+        notifyChangeListener();
 	}
 
 	public String getAchsfolge() {
@@ -329,8 +330,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAchsfolge(String achsfolge) {
-		notifyChangeListener();
 		this.achsfolge = achsfolge;
+        notifyChangeListener();
 	}
 
 	public String getTyp() {
@@ -338,8 +339,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setTyp(String typ) {
-		notifyChangeListener();
 		this.typ = typ;
+        notifyChangeListener();
 	}
 
 	public String getAufbau() {
@@ -347,8 +348,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setAufbau(String aufbau) {
-		notifyChangeListener();
 		this.aufbau = aufbau;
+        notifyChangeListener();
 	}
 
 	public String getArt() {
@@ -356,8 +357,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setArt(String art) {
-		notifyChangeListener();
 		this.art = art;
+        notifyChangeListener();
 	}
 
 	public String getDruck() {
@@ -365,8 +366,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setDruck(String druck) {
-		notifyChangeListener();
 		this.druck = druck;
+        notifyChangeListener();
 	}
 
 	public String getPreisEK() {
@@ -374,8 +375,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setPreisEK(String preisEK) {
-		notifyChangeListener();
 		this.preisEK = preisEK;
+        notifyChangeListener();
 	}
 
 	public String getPreisVK() {
@@ -383,8 +384,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setPreisVK(String preisVK) {
-		notifyChangeListener();
 		this.preisVK = preisVK;
+        notifyChangeListener();
 	}
 
 	public String getPreisSL() {
@@ -392,8 +393,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setPreisSL(String preisSL) {
-		notifyChangeListener();
 		this.preisSL = preisSL;
+        notifyChangeListener();
 	}
 
 	public int getModellArt() {
@@ -401,8 +402,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setModellArt(int modellArt) {
-		notifyChangeListener();
 		this.modellArt = modellArt;
+        notifyChangeListener();
 	}
 
 	public List<ExtraProperty> getExtraProperties() {
@@ -410,7 +411,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 	}
 
 	public void setExtraProperties(List<ExtraProperty> extraProperties) {
-		notifyChangeListener();
 		this.extraProperties = extraProperties;
+        notifyChangeListener();
 	}
 }

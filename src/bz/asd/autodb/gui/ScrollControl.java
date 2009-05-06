@@ -1,5 +1,7 @@
 package bz.asd.autodb.gui;
 
+import bz.asd.autodb.logic.ListController;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -17,8 +19,11 @@ package bz.asd.autodb.gui;
  */
 public class ScrollControl extends javax.swing.JPanel {
 
+    private ListController controller;
+
     /** Creates new form ScrollControl */
-    public ScrollControl() {
+    public ScrollControl(ListController controller) {
+        this.controller = controller;
         initComponents();
     }
 
@@ -35,11 +40,29 @@ public class ScrollControl extends javax.swing.JPanel {
         nextButton = new javax.swing.JButton();
 
         prevButton.setText("<<");
+        prevButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prevButtonActionPerformed(evt);
+            }
+        });
         add(prevButton);
 
         nextButton.setText(">>");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
         add(nextButton);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        controller.selectNext();
+    }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void prevButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevButtonActionPerformed
+        controller.selectPrev();
+    }//GEN-LAST:event_prevButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

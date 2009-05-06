@@ -51,6 +51,7 @@ public class DbViewController extends Controller implements CloseListener {
     protected View createView() throws Exception {
         mvc = new ModelViewController();
         mvc.setParentFrame(parentFrame);
+        getModel().addDbContentListener(mvc);
 
         tvc = new TreeViewController(getModel(), mvc);
         tvc.setParentFrame(parentFrame);

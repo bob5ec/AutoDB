@@ -29,6 +29,12 @@ public class ViewContainer extends JPanel implements View {
         validate();
     }
 
+    public void removeView() {
+        removeAll();
+        validate();
+        repaint();
+    }
+
     public void setModel(Model model) {
         //throw new UnsupportedOperationException("Not supported yet.");
         System.out.println("container has no model");

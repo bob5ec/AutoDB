@@ -1,5 +1,6 @@
 package bz.asd.autodb.logic;
 
+import bz.asd.autodb.data.CollectionChangeListener;
 import bz.asd.autodb.data.Database;
 import bz.asd.autodb.data.GroupTree;
 import bz.asd.autodb.data.Groupable;
@@ -12,12 +13,13 @@ import bz.asd.autodb.gui.TreeView;
 import bz.asd.autodb.data.Model;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 /**
  *
  * @author lars
  */
-public class TreeViewController extends Controller {
+public class TreeViewController extends Controller implements ListController, CollectionChangeListener<Groupable> {
 
     private Database db;
     private TreeViewSettings tvs;
@@ -53,16 +55,25 @@ public class TreeViewController extends Controller {
         return res;
     }
 
+    /**
+     * Listener of TreeSelection changes.
+     * @param leaf
+     */
     public void treeSelectLeaf(DefaultMutableTreeNode leaf) {
-        selectModel((Model)leaf.getUserObject());
+        modelView.setModel((Model)leaf.getUserObject());
     }
 
+    /**
+     * Listener of TreeSelection changes.
+     * @param node
+     */
     public void treeSelectInnerNode(DefaultMutableTreeNode node) {
-        selectModel((Model)node.getUserObject());
+        modelView.setModel((Model)node.getUserObject());
     }
 
-    private void selectModel(Model model) {
-        modelView.setModel(model);
+    private void selectNode(DefaultMutableTreeNode node) {
+        getView().selectNode(node);
+        modelView.setModel((Model)node.getUserObject());
     }
 
     @Override
@@ -73,7 +84,7 @@ public class TreeViewController extends Controller {
     @Override
     protected bz.asd.mvc.Model createModel() {
         GroupTree tree = GroupTree.create(models, tvs.getOrder(), tvs.getGroupLevel());
-        db.addDbContentListener(tree);
+        db.addDbContentListener(this);
         return tree;
     }
 
@@ -85,6 +96,49 @@ public class TreeViewController extends Controller {
     @Override
     protected GroupTree getModel() {
         return (GroupTree)model;
+    }
+
+    /* ListController implementation */
+
+    /**
+     * Not called from tree, but from a list representation
+     */
+    public void selectNext() {
+        DefaultMutableTreeNode curNode = (DefaultMutableTreeNode)getView().getSelectedNode();
+        if(curNode == null) return; // no node selected
+        curNode = getModel().getNextLeaf(curNode);
+        if(curNode == null) return; // last node selected
+
+        selectNode(curNode);
+    }
+
+    /**
+     * Not called from tree, but from a list representation
+     */
+    public void selectPrev() {
+        DefaultMutableTreeNode curNode = (DefaultMutableTreeNode)getView().getSelectedNode();
+        curNode = getModel().getPrevLeaf(curNode);
+        if(curNode == null) return; // last node selected
+
+        selectNode(curNode);
+    }
+
+    /* CollectionChangeListener Proxy to get notified before model */
+    public void added(Groupable element) {
+        getModel().added(element);
+        selectNode(getModel().getNodeRef(element));
+    }
+
+    public void deleted(Groupable element) {
+        getModel().deleted(element);
+    }
+
+    public void changed(Groupable element) {
+        getModel().changed(element);
+        //IMPROVE check if we realy have to select the node again
+        if(getView().getSelectedNode() == null) {
+            selectNode(getModel().getNodeRef(element));
+        }
     }
 
 }

@@ -17,6 +17,7 @@ import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 /**
@@ -43,6 +44,19 @@ public class TreeView extends javax.swing.JPanel implements View {
         //if(jTree1 != null) ((GroupTreeView)jTree1).setController(this.controller);
     }
 
+    public TreeNode getSelectedNode() {
+        TreePath path = jTree1.getSelectionPath();
+        TreeNode node = null;
+        if(path != null) node = (TreeNode) path.getLastPathComponent();
+        return node;
+    }
+
+    public void selectNode(DefaultMutableTreeNode node) {
+        TreePath path = new TreePath(node.getPath());
+        jTree1.setSelectionPath(path);
+		jTree1.scrollPathToVisible(path);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -52,7 +66,7 @@ public class TreeView extends javax.swing.JPanel implements View {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollControl1 = new bz.asd.autodb.gui.ScrollControl();
+        scrollControl1 = new ScrollControl(controller);
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new GroupTreeView(controller);
         searchField = new javax.swing.JTextField();
@@ -80,14 +94,24 @@ public class TreeView extends javax.swing.JPanel implements View {
     private void jTree1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MousePressed
         // change jTree expansion event from double click to single click
         TreePath oldPath = jTree1.getPathForLocation(evt.getX(), evt.getY());
+        if(oldPath == null) return; // no path selected
+
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)oldPath.getLastPathComponent();
         if(!node.isLeaf()) {
             TreePath newPath = oldPath.pathByAddingChild(node.getChildAt(0));
-            jTree1.scrollPathToVisible(newPath);
+
+            // toggle open close path
+            if(jTree1.isExpanded(oldPath)) {
+                jTree1.collapsePath(oldPath);
+            } else {
+                jTree1.scrollPathToVisible(newPath);
+            }
         }
     }//GEN-LAST:event_jTree1MousePressed
 
     private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
+        if(!evt.isAddedPath()) return; // do not handel events from deleted nodes
+        
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)evt.getPath().getLastPathComponent();
         if(node.isLeaf()) {
             System.out.println("display "+node);

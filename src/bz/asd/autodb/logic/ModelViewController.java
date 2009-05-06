@@ -16,12 +16,13 @@ import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import bz.asd.autodb.data.CollectionChangeListener;
 
 /**
  *
  * @author lars
  */
-public class ModelViewController extends Controller {
+public class ModelViewController extends Controller implements CollectionChangeListener<Model> {
 
     private ModelView modelView;
     private boolean displayPlaceholder;
@@ -59,11 +60,20 @@ public class ModelViewController extends Controller {
         return (Model) model;
     }
 
-public void setModel(Model model) {
-        if(model.equals(this.model)) return;
+    /**
+     * Set the Model to display.
+     * @param model the model to display. If <i>null</i> a placeholder is used
+     */
+    public void setModel(Model model) {
+        if(model == this.model
+                || (model != null && model.equals(this.model))) return;
 
         this.model = model;
-        if(displayPlaceholder == true) {
+
+        if(model == null) {
+            displayPlaceholder = true;
+            getView().removeView();
+        } else if(displayPlaceholder == true) {
             displayPlaceholder = false;
             
             if(modelView == null) {
@@ -83,6 +93,19 @@ public void setModel(Model model) {
         }
             //    .setModel(model);
         // observer for the TreeViewController
+    }
+
+    /*CollectionChangeListener implementation */
+
+    public void added(Model element) {
+    }
+
+    public void deleted(Model element) {
+        setModel(null);
+        //throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void changed(Model element) {
     }
 
 }

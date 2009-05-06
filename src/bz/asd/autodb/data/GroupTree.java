@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
-import java.util.Comparator;
 
 /**
  *
@@ -128,12 +127,12 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
         int i=0;
         while(children.hasMoreElements()) {
             DefaultMutableTreeNode child = children.nextElement();
-            i++;
-
-            if(sort.compare(element, (Groupable)child.getUserObject()) >= 0) {
+            
+            if(sort.compare(element, (Groupable)child.getUserObject()) <= 0) {
                 break;
-            }
+            } else i++;
         }
+        if(i==0) parent.setUserObject(element); // groups always have the first element as userObject
         insertNodeInto(node, parent, i);
     }
 
@@ -147,7 +146,14 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
         removeNodeFromParent((DefaultMutableTreeNode)path[path.length-1]);
         // remove empty inner nodes, not leaf and root
         for(int i=path.length-2; i>0; i--) {
-            if(path[i].getChildCount() != 0) break;
+            if(path[i].getChildCount() != 0) {
+                // set other child userobject as userobj of the group
+                DefaultMutableTreeNode parent = (DefaultMutableTreeNode)path[i];
+                DefaultMutableTreeNode child = (DefaultMutableTreeNode)path[i].getChildAt(0);
+                parent.setUserObject(child.getUserObject());
+                // and stop searching
+                break;
+            }
             removeNodeFromParent((DefaultMutableTreeNode)path[i]);
         }
 
@@ -166,7 +172,11 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
         for(int i=0; i<pathNode.length && samePath; i++) {
             samePath = pathNode[i] == pathOldNode[i];
         }
-        if(samePath) return; // path is the same, we don't have to change the tree
+        if(samePath) {
+            // path is the same, we don't have to change the tree
+            System.out.println("tree does not change");
+            return;
+        }
 
         // remove oldElement
         deleted(element);
@@ -201,8 +211,54 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
         return res;
     }
 
+    @Override
     public DefaultMutableTreeNode getRoot() {
         return (DefaultMutableTreeNode)super.getRoot();
     }
 
+    public DefaultMutableTreeNode getNextLeaf(DefaultMutableTreeNode node) {
+        // IMPROVE inefficient implementation used
+        DefaultMutableTreeNode nextNode = getRoot();
+
+        while(nextNode != node) {
+            nextNode = nextNode.getNextNode();
+        }
+        while(nextNode != null && !nextNode.isLeaf()) {
+            nextNode = nextNode.getNextNode();
+        }
+        // leaf of selected node found
+
+        // get next leaf
+        nextNode = nextNode.getNextNode();
+
+        while (nextNode != null && !nextNode.isLeaf()) {
+            // go to leaf
+            nextNode = nextNode.getNextNode();
+        }
+
+        return nextNode;
+    }
+
+    public DefaultMutableTreeNode getPrevLeaf(DefaultMutableTreeNode node) {
+        // IMPROVE inefficient implementation used
+        DefaultMutableTreeNode prevNode = getRoot();
+
+        while(prevNode != node) {
+            prevNode = prevNode.getNextNode();
+        }
+        while(prevNode != null && !prevNode.isLeaf()) {
+            prevNode = prevNode.getNextNode();
+        }
+        // leaf of selected node found
+
+        // get prev leaf
+        prevNode = prevNode.getPreviousNode();
+
+        while (prevNode != null && !prevNode.isLeaf()) {
+            // go to leaf
+            prevNode = prevNode.getPreviousNode();
+        }
+
+        return prevNode;
+    }
 }
