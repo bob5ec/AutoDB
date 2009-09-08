@@ -1,5 +1,7 @@
 package bz.asd.mvc;
 
+import bz.asd.autodb.gui.ExceptionDialog;
+import bz.asd.autodb.gui.YesNoDialog;
 import java.awt.Frame;
 
 /** This class defines a generic Controller of the MVC pattern.
@@ -26,7 +28,32 @@ public abstract class Controller {
     protected abstract Model createModel() throws Exception;
 
     public void handleException(String userError, Throwable e) {
+        ExceptionDialog dialog = new ExceptionDialog(parentFrame);
+        dialog.setException(e);
+        dialog.setUserError(userError);
+        dialog.setVisible(true);
         e.printStackTrace();
+    }
+
+    public void handleUserError(String userError) {
+        ExceptionDialog dialog = new ExceptionDialog(parentFrame);
+        dialog.setUserError(userError);
+        dialog.setVisible(true);
+    }
+
+    public int askUserYesNo(String userQuestion) {
+        YesNoDialog dialog = new YesNoDialog(parentFrame);
+        dialog.setUserQuestion(userQuestion);
+        dialog.showYesNoDialog();
+        return dialog.getReturnStatus();
+    }
+
+    public int askUserYesNoCancle(String userQuestion) {
+        YesNoDialog dialog = new YesNoDialog(parentFrame);
+        dialog.setUserQuestion(userQuestion);
+        dialog.setCancelVisible(true);
+        dialog.showYesNoDialog();
+        return dialog.getReturnStatus();
     }
 
     //TODO View needs to initializes AFTER Model and Controller has been set?

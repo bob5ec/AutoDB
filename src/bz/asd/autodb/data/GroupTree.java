@@ -30,7 +30,7 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
      *
      * @param elements The data items to be in the tree
      * @param order the order, which determines which attribute is ordered first and which afterwards
-     * @param groupLevel depth of the tree. 0 meens no grooping
+     * @param groupLevel depth of the tree. 0 meens no grouping
      * @return
      */
     public static GroupTree create(List<Groupable> elements, int[] order, int groupLevel) {
@@ -79,13 +79,21 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
     // implementatio of CollectionChangeListener<Groupable>
 
     public void added(Groupable element) {
+        //TODO BUG: sometimes existing groups are not used when inserting matiching elements
+        // --> dublicate groups with same name
         System.out.println("GroupTree: added "+element);
 
         // find group with prefix of the new element
         //    if not exists find yungest ancester
-        Group ancester = getExistingMatchingAncester(element);
+        DefaultMutableTreeNode ancester = getExistingMatchingAncester(element);
+
+        int i = 0; // check for existing matching groups
+        if(ancester instanceof Group) {
+            i=((Group) ancester).getCommonPrefix(element);
+        }
+
         // create branche to the leaf
-        for(int i=ancester.getCommonPrefix(element); i<groupLevel; i++) {
+        for(; i<groupLevel; i++) {
             Group child = new Group(element, order, i);
             insertSorted(ancester, child);
             ancester = child;
@@ -99,16 +107,17 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
      * @param element
      * @return
      */
-    public Group getExistingMatchingAncester(Groupable element) {
+    public DefaultMutableTreeNode getExistingMatchingAncester(Groupable element) {
         int maxMatch = 0;
-        DefaultMutableTreeNode maxMatchNode = null;
+        DefaultMutableTreeNode maxMatchNode = getRoot();
 
         Enumeration<DefaultMutableTreeNode> nodes= getRoot().depthFirstEnumeration();
         while(nodes.hasMoreElements()) {
             DefaultMutableTreeNode node = nodes.nextElement();
 
             if(!node.isLeaf()) {
-                int match = ((Group)node).getCommonPrefix(element);
+                int match = 0;
+                if(node instanceof Group) match = ((Group)node).getCommonPrefix(element);
                 if(match >= maxMatch) {
                     maxMatch = match;
                     maxMatchNode = node;
@@ -116,7 +125,7 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
             }
         }
 
-        return (Group)maxMatchNode;
+        return maxMatchNode;
     }
 
     public void insertSorted(DefaultMutableTreeNode parent, DefaultMutableTreeNode node) {

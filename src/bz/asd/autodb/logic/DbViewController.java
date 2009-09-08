@@ -5,6 +5,7 @@ import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.DbView;
+import bz.asd.autodb.gui.YesNoDialog;
 import java.awt.Container;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,9 +87,10 @@ public class DbViewController extends Controller implements CloseListener {
         if(getModel().hasChanged()) {
             //todo prompt user for saving or loosing unsaved changes
             //ok = okCancle.getResult()
-            ok = true;
-            
-            if(ok) {
+            int answer = askUserYesNoCancle("Sollen die Änderungen gespeichert werden?");
+            ok = answer != YesNoDialog.RET_CANCLE;
+
+            if(answer == YesNoDialog.RET_YES) {
                 try {
                     getModel().save();
                 } catch (Exception ex) {
@@ -108,6 +110,15 @@ public class DbViewController extends Controller implements CloseListener {
             getModel().close();
         } catch (Exception ex) {
             handleException("Fehler beim schließen der Datenbank.", ex);
+            Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void save() {
+        try {
+            getModel().save();
+        } catch (Exception ex) {
+            handleException("Fehler beim speichern der Datenbank.", ex);
             Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
