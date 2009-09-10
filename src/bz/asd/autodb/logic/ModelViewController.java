@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import bz.asd.autodb.data.CollectionChangeListener;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -93,6 +94,19 @@ public class ModelViewController extends Controller implements CollectionChangeL
         }
             //    .setModel(model);
         // observer for the TreeViewController
+    }
+
+    public void chooseImageFile() {
+        JFileChooser fileChooser = new javax.swing.JFileChooser();
+        fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+        /*FileNameExtensionFilter filter = new FileNameExtensionFilter(
+        "JPG & GIF Images", "jpg", "gif");
+        chooser.setFileFilter(filter);*/
+        int returnVal = fileChooser.showOpenDialog(getView());
+        if(returnVal != JFileChooser.APPROVE_OPTION) return;
+        // only continue on ok-Button
+
+        modelView.getModel().setBilddatei(fileChooser.getSelectedFile().getAbsolutePath());
     }
 
     /*CollectionChangeListener implementation */

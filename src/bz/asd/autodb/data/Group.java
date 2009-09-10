@@ -33,6 +33,9 @@ public class Group<T extends Groupable<? super T>> extends DefaultMutableTreeNod
         String s;
         if(userObject == null) s = "";
         else {
+            //TODO BUG: sometimes existing groups are not used when inserting matiching elements
+            // --> dublicate groups with same name
+            // @see GroupTree
             Object obj = getUserObject().getValue(order[groupLevel]);
             if(obj == null) s = "";
             else {

@@ -144,7 +144,9 @@ public class GroupTree extends DefaultTreeModel implements bz.asd.mvc.Model, Col
         if(i==0) parent.setUserObject(element); // groups always have the first element as userObject
         insertNodeInto(node, parent, i);
     }
-
+/*TODO BUG: after deleting the vorletzte element from the db the beans binding crashes because groupLevel is -1
+ * wird vielleicht die root ausgewählt?
+*/
     public void deleted(Groupable element) {
         System.out.println("GroupTree: deleted "+element);
         // find node

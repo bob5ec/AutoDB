@@ -16,6 +16,11 @@ import bz.asd.autodb.data.DefaultModel;
 import bz.asd.autodb.data.Model;
 import bz.asd.autodb.logic.ModelViewController;
 import bz.asd.mvc.View;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import org.jdesktop.beansbinding.Binding;
 
 /**
@@ -31,6 +36,13 @@ public class ModelView extends javax.swing.JPanel implements View {
      */
     public ModelView() {
         initComponents();
+        /*ImageView img = new ImageView();
+        img.setMaxHeight(300);
+        img.setMaxWidth(300);
+        lblImage.setIcon(img);
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, model, org.jdesktop.beansbinding.ELProperty.create("${bilddatei}"), img, org.jdesktop.beansbinding.BeanProperty.create("imageFilename"));
+        bindingGroup.addBinding(binding);
+        bindingGroup.bind();*/
     }
 
     public void setModel(bz.asd.mvc.Model model) {
@@ -64,47 +76,106 @@ public class ModelView extends javax.swing.JPanel implements View {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         model = new bz.asd.autodb.data.DefaultModel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        image = new bz.asd.autodb.gui.ImageView();
+        lblHersteller = new javax.swing.JLabel();
+        tfdHersteller = new javax.swing.JTextField();
+        imagePanel = new javax.swing.JPanel();
+        btnDurchsuchen = new javax.swing.JButton();
+        tfdImageFile = new javax.swing.JTextField();
+        lblImage = new javax.swing.JLabel();
+
+        image.setMaxHeight(300);
+        image.setMaxWidth(300);
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, model, org.jdesktop.beansbinding.ELProperty.create("${bilddatei}"), image, org.jdesktop.beansbinding.BeanProperty.create("imageFilename"));
+        bindingGroup.addBinding(binding);
 
         setMinimumSize(new java.awt.Dimension(300, 300));
 
-        jLabel1.setText("Hersteller");
+        lblHersteller.setText("Hersteller");
 
-        jTextField1.setMinimumSize(new java.awt.Dimension(60, 21));
+        tfdHersteller.setMinimumSize(new java.awt.Dimension(60, 21));
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, model, org.jdesktop.beansbinding.ELProperty.create("${hersteller}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, model, org.jdesktop.beansbinding.ELProperty.create("${hersteller}"), tfdHersteller, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
+
+        btnDurchsuchen.setText("Durchsuchen");
+        btnDurchsuchen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDurchsuchenActionPerformed(evt);
+            }
+        });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, model, org.jdesktop.beansbinding.ELProperty.create("${bilddatei}"), tfdImageFile, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        lblImage.setIcon(image);
+        lblImage.setPreferredSize(new java.awt.Dimension(300, 200));
+
+        javax.swing.GroupLayout imagePanelLayout = new javax.swing.GroupLayout(imagePanel);
+        imagePanel.setLayout(imagePanelLayout);
+        imagePanelLayout.setHorizontalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagePanelLayout.createSequentialGroup()
+                .addComponent(tfdImageFile, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDurchsuchen))
+            .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+        );
+        imagePanelLayout.setVerticalGroup(
+            imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, imagePanelLayout.createSequentialGroup()
+                .addComponent(lblImage, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(imagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfdImageFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDurchsuchen)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblHersteller)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfdHersteller, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(imagePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(267, Short.MAX_VALUE))
+                    .addComponent(tfdHersteller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHersteller)))
         );
 
         bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDurchsuchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDurchsuchenActionPerformed
+        controller.chooseImageFile();
+    }//GEN-LAST:event_btnDurchsuchenActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton btnDurchsuchen;
+    private bz.asd.autodb.gui.ImageView image;
+    private javax.swing.JPanel imagePanel;
+    private javax.swing.JLabel lblHersteller;
+    private javax.swing.JLabel lblImage;
     private bz.asd.autodb.data.DefaultModel model;
+    private javax.swing.JTextField tfdHersteller;
+    private javax.swing.JTextField tfdImageFile;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 

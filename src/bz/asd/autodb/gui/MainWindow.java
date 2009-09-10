@@ -104,6 +104,8 @@ public class MainWindow extends javax.swing.JFrame implements View {
                 formKeyTyped(evt);
             }
         });
+
+        dbView.setLayout(new java.awt.BorderLayout());
         getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
 
         dateiMenu.setText("Datei");

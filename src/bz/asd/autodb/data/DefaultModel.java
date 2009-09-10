@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package bz.asd.autodb.data;
 
 /**
@@ -16,18 +15,17 @@ public class DefaultModel extends Model {
     public DefaultModel() {
         hasChanged = false;
     }
-    
+
     public void setHasChanged(boolean hasChanged) {
-		this.hasChanged = hasChanged;
-	}
+        this.hasChanged = hasChanged;
+    }
 
     public boolean hasChanged() {
-		return hasChanged;
-	}
+        return hasChanged;
+    }
 
     @Override
     protected void notifyChangeListener() {
         setHasChanged(true);
     }
-
 }
