@@ -56,7 +56,6 @@ public class MainWindow extends javax.swing.JFrame implements View {
         getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
         getContentPane().validate();
         //repaint();
-        //getContentPane().validate();
         //pack();
     }
 
@@ -65,6 +64,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
     }
 
     private void initAccelerators() {
+        //TODO make shortcuts work
         dateiOeffnenMenuItem.getAccelerator();
     }
 
@@ -105,6 +105,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
             }
         });
 
+        dbView.setMinimumSize(new java.awt.Dimension(500, 500));
         dbView.setLayout(new java.awt.BorderLayout());
         getContentPane().add(dbView, java.awt.BorderLayout.CENTER);
 

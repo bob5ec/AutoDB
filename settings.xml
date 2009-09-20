@@ -2,15 +2,29 @@
 <java version="1.6.0_12" class="java.beans.XMLDecoder"> 
  <object class="bz.asd.autodb.data.UserSession"> 
   <void property="lastOpenFiles"> 
-   <array class="java.lang.String" length="5"/> 
+   <object class="bz.asd.autodb.data.RingBuffer"> 
+    <void property="buffer"> 
+     <array class="java.lang.Object" length="1"> 
+      <void index="0"> 
+       <string>/home/lars/test.db4o</string> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="size"> 
+     <int>5</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="windowSize"> 
+   <object class="java.awt.Dimension"> 
+    <int>821</int> 
+    <int>532</int> 
+   </object> 
   </void> 
  </object> 
  <object class="bz.asd.autodb.data.TreeViewSettings"> 
-  <void property="groupLevel"> 
-   <int>1</int> 
-  </void> 
   <void property="order"> 
-   <array class="int" length="1"/> 
+   <array class="int" length="0"/> 
   </void> 
  </object> 
 </java> 

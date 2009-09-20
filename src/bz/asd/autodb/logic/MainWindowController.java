@@ -2,6 +2,7 @@ package bz.asd.autodb.logic;
 
 import bz.asd.autodb.data.Database;
 import bz.asd.autodb.data.Settings;
+import bz.asd.autodb.data.UserSession;
 import bz.asd.autodb.data.db4o.Db4oDatabase;
 import bz.asd.autodb.gui.ExceptionDialog;
 import bz.asd.mvc.Controller;
@@ -15,10 +16,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainWindowController extends Controller {
 
@@ -32,6 +33,15 @@ public class MainWindowController extends Controller {
         dbvc = null;
         subwindowController = new LinkedList<DbViewController>();
         init();
+
+        String lastOpenFile = (String)Settings.getInstance().getUserSession()
+                .getLastOpenFiles().getLast();
+        try {
+            if(lastOpenFile != null) open(new File(lastOpenFile));
+        } catch (Exception ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            handleException("Datenbank "+lastOpenFile+ " konnte nicht geöffnet werden.", ex);
+        }
     }
     
     /*public DbViewController getDbViewController() {
@@ -77,7 +87,7 @@ public class MainWindowController extends Controller {
     }
 
     /**
-     * Open a file with the korresponding db engine.
+     * Open a file with the corresponding db engine.
      * @param file
      * @throws java.lang.Exception
      */
@@ -126,6 +136,8 @@ public class MainWindowController extends Controller {
             getView().setDbViewController(newDbvc);
             getView().setDbMenuEnabled(true);
         }
+
+        Settings.getInstance().getUserSession().getLastOpenFiles().add(file.getAbsolutePath());
     }
 
     /**
@@ -214,6 +226,7 @@ public class MainWindowController extends Controller {
                 //order[0] = bz.asd.autodb.data.Model.DRUCK;
                 //Settings.getInstance().getTreeViewSettings().setOrder(order);
                 //Settings.getInstance().getTreeViewSettings().setGroupLevel(1);
+                Settings.getInstance().getUserSession().setWindowSize(getView().getSize());
                 Settings.getInstance().save();
                 System.exit(0);
             } catch (IOException ex) {
@@ -231,6 +244,7 @@ public class MainWindowController extends Controller {
     @Override
     protected View createView() {
         MainWindow mw = new MainWindow(this, new ViewPlaceholder(400,300));
+        mw.setSize(Settings.getInstance().getUserSession().getWindowSize());
         mw.setVisible(true);
         return mw;
     }

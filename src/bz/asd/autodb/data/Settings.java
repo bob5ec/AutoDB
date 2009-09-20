@@ -1,5 +1,6 @@
 package bz.asd.autodb.data;
 
+import java.awt.Dimension;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;
@@ -13,31 +14,32 @@ import java.io.IOException;
  *
  */
 public class Settings {
-	
-	private static final String SETTINGS_FILENAME = "settings.xml";
+
+    private static final String SETTINGS_FILENAME = "settings.xml";
     private static final int LAST_OPEN_FILES_COUNT = 5;
-
     private static Settings instance;
-
     private UserSession userSession;
     private TreeViewSettings treeViewSettings;
-	
-	private Settings() {
-        
-		try {
+
+    private Settings() {
+
+        try {
             try {
                 load();
             } catch (FileNotFoundException fnfe) {
                 System.out.println("No config file found, setting defaults.");
                 setDefaults();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            setDefaults();
         }
-	}
+    }
 
     public static Settings getInstance() {
-        if(instance == null) instance = new Settings();
+        if (instance == null) {
+            instance = new Settings();
+        }
         return instance;
     }
 
@@ -48,11 +50,11 @@ public class Settings {
     private void load(String filename) throws IOException {
         FileInputStream is = new FileInputStream(filename);
         XMLDecoder decoder = new XMLDecoder(is);
-        userSession = (UserSession)decoder.readObject();
-        treeViewSettings = (TreeViewSettings)decoder.readObject();
+        userSession = (UserSession) decoder.readObject();
+        treeViewSettings = (TreeViewSettings) decoder.readObject();
         decoder.close();
     }
-    
+
     public void save(String filename) throws IOException {
         FileOutputStream os = new FileOutputStream(filename);
         XMLEncoder encoder = new XMLEncoder(os);
@@ -66,9 +68,8 @@ public class Settings {
     }
 
     private void setDefaults() {
-        String[] lastOpenFiles = new String[LAST_OPEN_FILES_COUNT];
         userSession = new UserSession();
-        userSession.setLastOpenFiles(lastOpenFiles);
+        userSession.setDefaults();
         treeViewSettings = new TreeViewSettings();
         treeViewSettings.setGroupLevel(0);
         treeViewSettings.setOrder(new int[0]);
@@ -83,7 +84,6 @@ public class Settings {
     }
 
     // TODO add change listener here
-    
     public TreeViewSettings getTreeViewSettings() {
         return treeViewSettings;
     }

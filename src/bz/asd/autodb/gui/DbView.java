@@ -65,8 +65,11 @@ public class DbView extends javax.swing.JPanel implements View {
 
         jSplitPane1 = new javax.swing.JSplitPane();
 
+        setAutoscrolls(true);
+        setMinimumSize(new java.awt.Dimension(500, 300));
         setLayout(new java.awt.BorderLayout());
 
+        jSplitPane1.setDividerLocation(200);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(400, 300));
         add(jSplitPane1, java.awt.BorderLayout.CENTER);
