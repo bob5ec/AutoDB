@@ -75,7 +75,7 @@ public class ImageView implements Icon, Serializable {
             scaledHeight = (int)(image.getHeight() * scale);
             scaledWidth  = (int)(image.getWidth()  * scale);
             
-            arg1.drawImage(image, arg2, arg3, scaledWidth, scaledHeight, arg0);
+            arg1.drawImage(image, arg0.getX(), arg0.getY(), scaledWidth, scaledHeight, arg0);
         }
         System.out.println(arg0.getWidth() +" "+arg0.getHeight());
     }
