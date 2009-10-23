@@ -32,9 +32,9 @@ public class DbView extends javax.swing.JPanel implements View {
     /** Creates new form DbView */
     public DbView(DbViewController controller, TreeView treeView, Container modelView) {
         this.controller = controller;
+        this.treeView = treeView;
+        this.viewContainer = (ViewContainer)modelView;
         initComponents();
-        jSplitPane1.setRightComponent(modelView);
-        jSplitPane1.setLeftComponent(treeView);
     }
 
     public void setModel(Model model) {
@@ -64,6 +64,8 @@ public class DbView extends javax.swing.JPanel implements View {
     private void initComponents() {
 
         jSplitPane1 = new javax.swing.JSplitPane();
+        treeView = treeView;
+        viewContainer = viewContainer;
 
         setAutoscrolls(true);
         setMinimumSize(new java.awt.Dimension(500, 300));
@@ -72,13 +74,19 @@ public class DbView extends javax.swing.JPanel implements View {
         jSplitPane1.setDividerLocation(200);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(400, 300));
-        jSplitPane1.setPreferredSize(null);
+        jSplitPane1.setLeftComponent(treeView);
+
+        viewContainer.setLayout(new java.awt.BorderLayout());
+        jSplitPane1.setRightComponent(viewContainer);
+
         add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSplitPane jSplitPane1;
+    private bz.asd.autodb.gui.TreeView treeView;
+    private bz.asd.autodb.gui.ViewContainer viewContainer;
     // End of variables declaration//GEN-END:variables
 
 

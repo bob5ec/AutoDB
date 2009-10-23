@@ -19,6 +19,10 @@ import javax.swing.JPanel;
  */
 public class ViewContainer extends JPanel implements View {
 
+    public ViewContainer() {
+        
+    }
+
     public ViewContainer(int width, int hight) {
         setMinimumSize(new Dimension(width, hight));
     }

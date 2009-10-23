@@ -28,7 +28,10 @@ public class TreeView extends javax.swing.JPanel implements View {
 
     private TreeViewController controller;
 
-    /** Creates new form TreeView */
+    public TreeView() {
+        initComponents();
+    }
+
     public TreeView(Controller controller) {
         setController(controller);
         initComponents();
