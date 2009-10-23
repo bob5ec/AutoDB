@@ -17,7 +17,7 @@ import javax.swing.Icon;
  */
 public class ImageView implements Icon, Serializable {
 
-    private int maxWidth, maxHeight, width, height;
+    private int scaledWidth, scaledHeight;
     private BufferedImage image;
 
     public ImageView() {
@@ -26,10 +26,15 @@ public class ImageView implements Icon, Serializable {
 
     public void setImage(File file) throws IOException {
         image = ImageIO.read(file);
-        
+
+
+        //System.out.println(width + " "+ height);
+    }
+
+    public double calcScale(int maxWidth, int maxHeight, int imgWidth, int imgHeight) {
         // skale up the image to the maximum possible size
-        double hSkale = maxHeight / (double)image.getHeight();
-        double wSkale = maxWidth  / (double)image.getWidth();
+        double hSkale = maxHeight / (double)imgHeight;
+        double wSkale = maxWidth  / (double)imgWidth;
         double skale;
         int skaledHeight = (int)(image.getHeight() * wSkale);
         int skaledWidth  = (int)(image.getWidth()  * hSkale);
@@ -42,10 +47,7 @@ public class ImageView implements Icon, Serializable {
         } else {
             skale = hSkale;
         }
-
-        height = (int)(image.getHeight() * skale);
-        width  = (int)(image.getWidth()  * skale);
-        //System.out.println(width + " "+ height);
+        return skale;
     }
 
     public void setImageFilename(String filename) {
@@ -67,19 +69,26 @@ public class ImageView implements Icon, Serializable {
     }
 
     public void paintIcon(Component arg0, Graphics arg1, int arg2, int arg3) {
-        if(image != null) arg1.drawImage(image, arg2, arg3, width, height, arg0);
-        //System.out.println(arg0.getWidth() +" "+arg0.getHeight());
+        if(image != null) {
+            double scale = calcScale(arg0.getWidth(), arg0.getHeight(), image.getWidth(), image.getHeight());
+        
+            scaledHeight = (int)(image.getHeight() * scale);
+            scaledWidth  = (int)(image.getWidth()  * scale);
+            
+            arg1.drawImage(image, arg2, arg3, scaledWidth, scaledHeight, arg0);
+        }
+        System.out.println(arg0.getWidth() +" "+arg0.getHeight());
     }
 
     public int getIconWidth() {
-        return width;
+        return scaledWidth;
     }
 
     public int getIconHeight() {
-        return height;
+        return scaledHeight;
     }
 
-    public int getMaxHeight() {
+    /*public int getMaxHeight() {
         return maxHeight;
     }
 
@@ -93,6 +102,6 @@ public class ImageView implements Icon, Serializable {
 
     public void setMaxWidth(int maxWidth) {
         this.maxWidth = maxWidth;
-    }
+    }*/
 
 }

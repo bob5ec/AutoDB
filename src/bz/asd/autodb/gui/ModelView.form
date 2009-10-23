@@ -4,18 +4,14 @@
   <NonVisualComponents>
     <Component class="bz.asd.autodb.data.DefaultModel" name="model">
     </Component>
-    <Component class="bz.asd.autodb.gui.ImageView" name="image">
-      <Properties>
-        <Property name="maxHeight" type="int" value="300"/>
-        <Property name="maxWidth" type="int" value="300"/>
-      </Properties>
-      <BindingProperties>
-        <BindingProperty name="imageFilename" source="model" sourcePath="${bilddatei}" target="image" targetPath="imageFilename" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
-    </Component>
     <Component class="javax.swing.ButtonGroup" name="bgModellart">
     </Component>
     <Component class="javax.swing.ButtonGroup" name="bgModellstandort">
+    </Component>
+    <Component class="bz.asd.autodb.gui.ImageView" name="image">
+      <BindingProperties>
+        <BindingProperty name="imageFilename" source="model" sourcePath="${bilddatei}" target="image" targetPath="imageFilename" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -160,7 +156,7 @@
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="preisePanel" min="-2" pref="64" max="-2" attributes="0"/>
+                  <Component id="preisePanel" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="lblProduktionsdatum" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>

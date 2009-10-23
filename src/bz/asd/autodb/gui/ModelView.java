@@ -77,9 +77,9 @@ public class ModelView extends javax.swing.JPanel implements View {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         model = new bz.asd.autodb.data.DefaultModel();
-        image = new bz.asd.autodb.gui.ImageView();
         bgModellart = new javax.swing.ButtonGroup();
         bgModellstandort = new javax.swing.ButtonGroup();
+        image = new bz.asd.autodb.gui.ImageView();
         lblHersteller = new javax.swing.JLabel();
         tfdHersteller = new javax.swing.JTextField();
         imagePanel = new javax.swing.JPanel();
@@ -125,9 +125,6 @@ public class ModelView extends javax.swing.JPanel implements View {
         tfdProduktionsdatum = new javax.swing.JTextField();
         lblAenderungsdatum = new javax.swing.JLabel();
         tfdAenderungsdatum = new javax.swing.JTextField();
-
-        image.setMaxHeight(300);
-        image.setMaxWidth(300);
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, model, org.jdesktop.beansbinding.ELProperty.create("${bilddatei}"), image, org.jdesktop.beansbinding.BeanProperty.create("imageFilename"));
         bindingGroup.addBinding(binding);
@@ -497,7 +494,7 @@ public class ModelView extends javax.swing.JPanel implements View {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(preisePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(preisePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblProduktionsdatum)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
