@@ -11,6 +11,7 @@
 
 package bz.asd.autodb.gui;
 
+import bz.asd.autodb.data.Settings;
 import bz.asd.autodb.logic.MainWindowController;
 import bz.asd.autodb.data.UserSession;
 import bz.asd.autodb.logic.DbViewController;
@@ -36,6 +37,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
         this.dbView = dbView;
         initComponents();
         initAccelerators();
+        Settings.getInstance().getTreeViewSettings().setGroupLevel(2);
     }
 
     public void setModel(Model model) {

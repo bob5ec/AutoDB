@@ -66,12 +66,14 @@ public class TreeView extends javax.swing.JPanel implements View {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollControl1 = new ScrollControl(controller);
+        scrollControl1 = new bz.asd.autodb.gui.ScrollControl();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new GroupTreeView(controller);
         searchField = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
+
+        scrollControl1.setController(controller);
         add(scrollControl1, java.awt.BorderLayout.NORTH);
 
         jTree1.setRootVisible(false);

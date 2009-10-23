@@ -22,8 +22,7 @@ public class ScrollControl extends javax.swing.JPanel {
     private ListController controller;
 
     /** Creates new form ScrollControl */
-    public ScrollControl(ListController controller) {
-        this.controller = controller;
+    public ScrollControl() {
         initComponents();
     }
 
@@ -64,6 +63,10 @@ public class ScrollControl extends javax.swing.JPanel {
         controller.selectPrev();
     }//GEN-LAST:event_prevButtonActionPerformed
 
+    public void setController(ListController controller) {
+        this.controller = controller;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton nextButton;

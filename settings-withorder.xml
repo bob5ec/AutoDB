@@ -4,12 +4,9 @@
   <void property="lastOpenFiles"> 
    <object class="bz.asd.autodb.data.RingBuffer"> 
     <void property="buffer"> 
-     <array class="java.lang.Object" length="2"> 
+     <array class="java.lang.Object" length="1"> 
       <void index="0"> 
        <string>/home/lars/test.db4o</string> 
-      </void> 
-      <void index="1"> 
-       <string>/home/lars/test3.db4o</string> 
       </void> 
      </array> 
     </void> 
@@ -20,8 +17,8 @@
   </void> 
   <void property="windowSize"> 
    <object class="java.awt.Dimension"> 
-    <int>777</int> 
-    <int>693</int> 
+    <int>763</int> 
+    <int>665</int> 
    </object> 
   </void> 
  </object> 
@@ -30,18 +27,33 @@
    <int>2</int> 
   </void> 
   <void property="order"> 
-   <array class="int" length="5"> 
+   <array class="int" length="9"> 
+    <void index="0"> 
+     <int>1</int> 
+    </void> 
     <void index="1"> 
-     <int>4</int> 
+     <int>2</int> 
     </void> 
     <void index="2"> 
-     <int>8</int> 
+     <int>3</int> 
     </void> 
     <void index="3"> 
-     <int>9</int> 
+     <int>4</int> 
     </void> 
     <void index="4"> 
-     <int>11</int> 
+     <int>5</int> 
+    </void> 
+    <void index="5"> 
+     <int>6</int> 
+    </void> 
+    <void index="6"> 
+     <int>7</int> 
+    </void> 
+    <void index="7"> 
+     <int>8</int> 
+    </void> 
+    <void index="8"> 
+     <int>9</int> 
     </void> 
    </array> 
   </void> 

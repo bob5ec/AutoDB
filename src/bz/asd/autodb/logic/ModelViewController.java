@@ -92,7 +92,7 @@ public class ModelViewController extends Controller implements CollectionChangeL
         } else {
             modelView.setModel(model);
         }
-            //    .setModel(model);
+        
         // observer for the TreeViewController
     }
 
@@ -107,6 +107,7 @@ public class ModelViewController extends Controller implements CollectionChangeL
         // only continue on ok-Button
 
         modelView.getModel().setBilddatei(fileChooser.getSelectedFile().getAbsolutePath());
+        modelView.repaint();
     }
 
     /*CollectionChangeListener implementation */

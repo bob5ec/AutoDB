@@ -72,6 +72,7 @@ public class DbView extends javax.swing.JPanel implements View {
         jSplitPane1.setDividerLocation(200);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setMinimumSize(new java.awt.Dimension(400, 300));
+        jSplitPane1.setPreferredSize(null);
         add(jSplitPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

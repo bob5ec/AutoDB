@@ -6,11 +6,11 @@ import java.text.DateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Date;
-import org.jdesktop.beans.AbstractBean;
 
-public abstract class Model /*extends AbstractBean*/ implements Groupable<Model>, bz.asd.mvc.Model {
+public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
 
     public static final int SERIENMODELL = 0, WERBEMODELL = 1, UMBAU = 2;
+    public static final int WETTMAR = 0, DINKLAGE = 1, GARBSEN = 2;
     //todo use this array, when naming attributed in UI
     public static final String[] ATTRIBUTE_NAMES = {"Hersteller", "Hersteller Nr",
         "Auflage", "Produktionsdatum", "Bild", "Modellstandort", "Marke", "Achsfolge",
@@ -27,7 +27,7 @@ public abstract class Model /*extends AbstractBean*/ implements Groupable<Model>
     //in this array is the first arrtibute to sort for
     private String hersteller, herstellerNr, auflage, produktionsdatum,
             bilddatei, marke, achsfolge, typ, aufbau, art, druck,
-            preisEK, preisVK, preisSL;
+            preisEK, preisVK, preisSL, bemerkung;
     private int modellArt, modellStandort;
     private Date aenderungsdatum;
     private List<ExtraProperty> extraProperties;
@@ -138,11 +138,11 @@ public abstract class Model /*extends AbstractBean*/ implements Groupable<Model>
         for (int i = groupLevel; i < order.length; i++) {
             String val = getStringValue(order[i]);
             if (val.length() != 0) {
-                res.append(order[i] + "=" + val + " ");
+                res.append(ATTRIBUTE_NAMES[order[i]] + "=" + val + " ");
             }
         }
 
-        int notOrdered = ATTRIBUTE_COUNT - order.length;
+        /*int notOrdered = ATTRIBUTE_COUNT - order.length;
         if (notOrdered > 0) {
             // Java is pesimistic, init with false
             boolean[] present = new boolean[ATTRIBUTE_COUNT];
@@ -155,11 +155,11 @@ public abstract class Model /*extends AbstractBean*/ implements Groupable<Model>
                 if (!present[i]) {
                     String val = getStringValue(i);
                     if (val.length() != 0) {
-                        res.append(" " + i + "=" + val);
+                        res.append(" " + ATTRIBUTE_NAMES[i] + "=" + val);
                     }
                 }
             }
-        }
+        }*/
 
 
         return res.toString();
@@ -417,6 +417,14 @@ public abstract class Model /*extends AbstractBean*/ implements Groupable<Model>
         notifyChangeListener();
     }
 
+    public String getBemerkung() {
+        return bemerkung;
+    }
+
+    public void setBemerkung(String bemerkung) {
+        this.bemerkung = bemerkung;
+    }
+    
     public int getModellArt() {
         return modellArt;
     }
@@ -424,6 +432,72 @@ public abstract class Model /*extends AbstractBean*/ implements Groupable<Model>
     public void setModellArt(int modellArt) {
         this.modellArt = modellArt;
         notifyChangeListener();
+    }
+
+    public boolean getModellArtSerienmodell() {
+        return modellArt == SERIENMODELL;
+    }
+
+    public void setModellArtSerienmodell(boolean serienmodell) {
+        if(serienmodell) {
+            this.modellArt = SERIENMODELL;
+            notifyChangeListener();
+        }
+    }
+
+    public boolean getModellArtWerbemodell() {
+        return modellArt == WERBEMODELL;
+    }
+
+    public void setModellArtWerbemodell(boolean werbemodell) {
+        if(werbemodell) {
+            this.modellArt = WERBEMODELL;
+            notifyChangeListener();
+        }
+    }
+
+    public boolean getModellArtEigenbau() {
+        return modellArt == UMBAU;
+    }
+
+    public void setModellArtEigenbau(boolean eigenbau) {
+        if(eigenbau) {
+            this.modellArt = UMBAU;
+            notifyChangeListener();
+        }
+    }
+
+    public boolean getModellStandortWettmar() {
+        return modellStandort == WETTMAR;
+    }
+
+    public void setModellStandortWettmar(boolean set) {
+        if(set) {
+            this.modellStandort = WETTMAR;
+            notifyChangeListener();
+        }
+    }
+
+    public boolean getModellStandortDinklage() {
+        return modellStandort == DINKLAGE;
+    }
+
+    public void setModellStandortDinklage(boolean set) {
+        if(set) {
+            this.modellStandort = DINKLAGE;
+            notifyChangeListener();
+        }
+    }
+
+    public boolean getModellStandortGarbsen() {
+        return modellStandort == GARBSEN;
+    }
+
+    public void setModellStandortGarbsen(boolean set) {
+        if(set) {
+            this.modellStandort = GARBSEN;
+            notifyChangeListener();
+        }
     }
 
     public List<ExtraProperty> getExtraProperties() {
@@ -436,7 +510,6 @@ public abstract class Model /*extends AbstractBean*/ implements Groupable<Model>
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        System.out.println("test");
         propertySupport.addPropertyChangeListener(listener);
     }
 

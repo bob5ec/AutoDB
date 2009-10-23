@@ -49,8 +49,11 @@ public class ImageView implements Icon, Serializable {
     }
 
     public void setImageFilename(String filename) {
-        System.out.println("imageView:"+filename);
-        if(filename == null) return;
+        //System.out.println("imageView:"+filename);
+        if(filename == null) {
+            image = null;
+            return;
+        }
 
         try {
             File file = new File(filename);
