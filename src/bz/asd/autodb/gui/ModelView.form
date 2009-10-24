@@ -42,7 +42,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblProduktionsdatum" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField1" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdProduktionsdatum" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -183,9 +183,9 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="tfdArt" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="modellartPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="modellartPanel" min="-2" pref="104" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="modellStandortPanel" min="-2" max="-2" attributes="0"/>
+                      <Component id="modellStandortPanel" min="-2" pref="104" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -193,14 +193,15 @@
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="preisePanel" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblProduktionsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblProduktionsdatum" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="tfdProduktionsdatum" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblAenderungsdatum" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="tfdAenderungsdatum" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="tfdAenderungsdatum" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -240,7 +241,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="lblImage" pref="265" max="32767" attributes="0"/>
+                  <Component id="lblImage" pref="269" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfdImageFile" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -596,15 +597,15 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblPreisEK" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdPreisEK" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="lblPreisVK" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="tfdPreisVK" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblPreisSL" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfdPreisSL" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -614,13 +615,13 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblPreisEK" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPreisVK" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPreisSL" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdPreisEK" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdPreisVK" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdPreisSL" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="25" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -631,50 +632,53 @@
             <Property name="text" type="java.lang.String" value="EK"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
-          <Properties>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[52, 25]"/>
-            </Property>
-          </Properties>
-          <BindingProperties>
-            <BindingProperty name="text" source="model" sourcePath="${preisEK}" target="jTextField1" targetPath="text" updateStrategy="0" immediately="false">
-              <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-            </BindingProperty>
-          </BindingProperties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblPreisVK">
           <Properties>
             <Property name="text" type="java.lang.String" value="VK"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
-          <Properties>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[52, 25]"/>
-            </Property>
-          </Properties>
-          <BindingProperties>
-            <BindingProperty name="text" source="model" sourcePath="${preisVK}" target="jTextField2" targetPath="text" updateStrategy="0" immediately="false">
-              <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-            </BindingProperty>
-          </BindingProperties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPreisSL">
           <Properties>
             <Property name="text" type="java.lang.String" value="SL"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JFormattedTextField" name="tfdPreisEK">
           <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format format="#0.00" subtype="-1" type="0"/>
+            </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[52, 25]"/>
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="text" source="model" sourcePath="${preisSL}" target="jTextField3" targetPath="text" updateStrategy="0" immediately="false">
-              <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-            </BindingProperty>
+            <BindingProperty name="value" source="model" sourcePath="${preisEK}" target="tfdPreisEK" targetPath="value" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="tfdPreisVK">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format format="#0.00" subtype="-1" type="0"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[52, 25]"/>
+            </Property>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="value" source="model" sourcePath="${preisVK}" target="tfdPreisVK" targetPath="value" updateStrategy="0" immediately="false"/>
+          </BindingProperties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="tfdPreisSL">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format format="#0.00" subtype="-1" type="0"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[52, 25]"/>
+            </Property>
+          </Properties>
+          <BindingProperties>
+            <BindingProperty name="value" source="model" sourcePath="${preisSL}" target="tfdPreisSL" targetPath="value" updateStrategy="0" immediately="false"/>
           </BindingProperties>
         </Component>
       </SubComponents>
@@ -702,18 +706,12 @@
         <BindingProperty name="value" source="model" sourcePath="${aenderungsdatum}" target="tfdAenderungsdatum" targetPath="value" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+    <Component class="javax.swing.JTextField" name="tfdProduktionsdatum">
       <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-          <Format format="d.M.yyyy" subtype="-1" type="1"/>
-        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[80, 25]"/>
         </Property>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="value" source="model" sourcePath="${produktionsdatum}" target="jFormattedTextField1" targetPath="value" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
     </Component>
   </SubComponents>
 </Form>

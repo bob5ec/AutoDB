@@ -1,5 +1,15 @@
-* Default werte für die Datumsfelder
-* Tastenkombinationen
+
 * Sortierungsoptionen implementieren
+* modell doppeln
+
+* Tastenkombinationen
+* Default werte für die Datumsfelder
+* zuletzt angesehenes Modell pro Datenbank speichern und beim öffnen wieder setzen.
+
 * Searchbox in TreeView
+* Bild vergrößern durch anklicken
 * Image Control (Gallerie zum Autos auswählen)
+* Export in PDF (auch mehrere Datensätze)
+
+BUGs
+* Start, neues Modell Anlegen, Anwendung Schließen -> keine Frage zum Speichen

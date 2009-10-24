@@ -7,12 +7,15 @@
   <void property="lastOpenFiles"> 
    <object class="bz.asd.autodb.data.RingBuffer"> 
     <void property="buffer"> 
-     <array class="java.lang.Object" length="2"> 
+     <array class="java.lang.Object" length="3"> 
       <void index="0"> 
        <string>/home/lars/test.db4o</string> 
       </void> 
       <void index="1"> 
        <string>/home/lars/test3.db4o</string> 
+      </void> 
+      <void index="2"> 
+       <string>/home/lars/odbcExport1256399268687.db4o</string> 
       </void> 
      </array> 
     </void> 

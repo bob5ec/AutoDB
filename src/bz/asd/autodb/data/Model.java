@@ -25,11 +25,12 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
     public static final String[] MODELLSTANDORT_NAMES = {"Wettmar", "Dinklage"};
     //todo a sort is an int array containig these numbers. the first element
     //in this array is the first arrtibute to sort for
-    private String hersteller, herstellerNr, auflage,
+    private String hersteller, herstellerNr, auflage, produktionsdatum,
             bilddatei, marke, achsfolge, typ, aufbau, art, druck,
-            preisEK, preisVK, preisSL, bemerkung;
+            bemerkung;
     private int modellArt, modellStandort;
-    private Date produktionsdatum, aenderungsdatum;
+    private double preisEK, preisVK, preisSL;
+    private Date aenderungsdatum;
     private List<ExtraProperty> extraProperties;
 
     protected PropertyChangeSupport propertySupport;
@@ -41,6 +42,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
     protected void init() {
         extraProperties = new LinkedList<ExtraProperty>();
         propertySupport = new PropertyChangeSupport(this);
+        aenderungsdatum = new Date();
     }
 
     //protected abstract void setHasChanged(boolean hasChanged);
@@ -63,9 +65,9 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
                     equals(typ, o.typ) &&
                     equals(aufbau, o.aufbau) &&
                     equals(art, o.art) &&
-                    equals(preisEK, o.preisEK) &&
-                    equals(preisVK, o.preisVK) &&
-                    equals(preisSL, o.preisSL) &&
+                    preisEK == o.preisEK &&
+                    preisVK == o.preisVK &&
+                    preisSL == o.preisSL &&
                     modellArt == o.modellArt &&
                     extraProperties.equals(o.extraProperties);
         } else {
@@ -296,11 +298,11 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
         notifyChangeListener();
     }
 
-    public Date getProduktionsdatum() {
+    public String getProduktionsdatum() {
         return produktionsdatum;
     }
 
-    public void setProduktionsdatum(Date produktionsdatum) {
+    public void setProduktionsdatum(String produktionsdatum) {
         this.produktionsdatum = produktionsdatum;
         notifyChangeListener();
     }
@@ -390,30 +392,30 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
         notifyChangeListener();
     }
 
-    public String getPreisEK() {
+    public Object getPreisEK() {
         return preisEK;
     }
 
-    public void setPreisEK(String preisEK) {
-        this.preisEK = preisEK;
+    public void setPreisEK(Object preisEK) {
+        this.preisEK = ((Number)preisEK).doubleValue();
         notifyChangeListener();
     }
 
-    public String getPreisVK() {
+    public Object getPreisVK() {
         return preisVK;
     }
 
-    public void setPreisVK(String preisVK) {
-        this.preisVK = preisVK;
+    public void setPreisVK(Object preisVK) {
+        this.preisVK = ((Number)preisVK).doubleValue();
         notifyChangeListener();
     }
 
-    public String getPreisSL() {
+    public Object getPreisSL() {
         return preisSL;
     }
 
-    public void setPreisSL(String preisSL) {
-        this.preisSL = preisSL;
+    public void setPreisSL(Object preisSL) {
+        this.preisSL = ((Number)preisSL).doubleValue();
         notifyChangeListener();
     }
 
