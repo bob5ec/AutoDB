@@ -17,7 +17,7 @@ import javax.swing.Icon;
  */
 public class ImageView implements Icon, Serializable {
 
-    private int scaledWidth, scaledHeight;
+    private int scaledWidth, scaledHeight, initComponentWidth, initComponentHight;
     private BufferedImage image;
 
     public ImageView() {
@@ -81,11 +81,15 @@ public class ImageView implements Icon, Serializable {
     }
 
     public int getIconWidth() {
-        return scaledWidth;
+        return 425;
+        /*if(initComponentWidth == 0) initComponentWidth = scaledWidth;
+        return initComponentWidth;*/
     }
 
     public int getIconHeight() {
-        return scaledHeight;
+        return 265;
+        /*if(initComponentHight == 0) initComponentHight = scaledHeight;
+        return initComponentHight;*/
     }
 
     /*public int getMaxHeight() {
