@@ -25,11 +25,11 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
     public static final String[] MODELLSTANDORT_NAMES = {"Wettmar", "Dinklage"};
     //todo a sort is an int array containig these numbers. the first element
     //in this array is the first arrtibute to sort for
-    private String hersteller, herstellerNr, auflage, produktionsdatum,
+    private String hersteller, herstellerNr, auflage,
             bilddatei, marke, achsfolge, typ, aufbau, art, druck,
             preisEK, preisVK, preisSL, bemerkung;
     private int modellArt, modellStandort;
-    private Date aenderungsdatum;
+    private Date produktionsdatum, aenderungsdatum;
     private List<ExtraProperty> extraProperties;
 
     protected PropertyChangeSupport propertySupport;
@@ -296,11 +296,11 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
         notifyChangeListener();
     }
 
-    public String getProduktionsdatum() {
+    public Date getProduktionsdatum() {
         return produktionsdatum;
     }
 
-    public void setProduktionsdatum(String produktionsdatum) {
+    public void setProduktionsdatum(Date produktionsdatum) {
         this.produktionsdatum = produktionsdatum;
         notifyChangeListener();
     }

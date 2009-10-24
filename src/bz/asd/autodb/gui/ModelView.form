@@ -34,81 +34,129 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" pref="473" max="32767" attributes="0"/>
-                          <Component id="imagePanel" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="tfdTyp" alignment="0" pref="222" max="32767" attributes="0"/>
-                                  <Component id="lblMarke" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblTyp" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="tfdMarke" alignment="0" pref="222" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="tfdAufbau" pref="239" max="32767" attributes="0"/>
-                                  <Component id="lblAchsfolge" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfdAchsfolge" alignment="0" pref="239" max="32767" attributes="0"/>
-                                  <Component id="lblAufbau" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jScrollPane1" alignment="0" pref="473" max="32767" attributes="0"/>
-                          <Component id="lblDruck" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblBemerkung" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblAuflage" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblHersteller" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblArt" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="modellartPanel" alignment="0" max="32767" attributes="1"/>
-                          <Component id="tfdAuflage" alignment="0" pref="188" max="32767" attributes="1"/>
-                          <Component id="tfdHerstellerNummer" alignment="0" pref="188" max="32767" attributes="1"/>
-                          <Component id="lblHerstellerNummer" alignment="0" pref="188" max="32767" attributes="1"/>
-                          <Component id="modellStandortPanel" alignment="0" max="32767" attributes="1"/>
-                          <Component id="tfdArt" alignment="0" pref="188" max="32767" attributes="1"/>
-                          <Component id="tfdHersteller" alignment="0" pref="188" max="32767" attributes="2"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="preisePanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblProduktionsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdProduktionsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProduktionsdatum" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextField1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfdAenderungsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdAenderungsdatum" min="-2" pref="81" max="-2" attributes="0"/>
                           <Component id="lblAenderungsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="imagePanel" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblBemerkung" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="381" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblDruck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="tfdHersteller" pref="212" max="32767" attributes="2"/>
+                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblHersteller" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblHerstellerNummer" pref="198" max="32767" attributes="1"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="tfdHerstellerNummer" pref="194" max="32767" attributes="2"/>
+                                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblAuflage" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdAuflage" min="-2" pref="119" max="-2" attributes="2"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblMarke" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfdMarke" pref="383" max="32767" attributes="2"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblAchsfolge" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfdAchsfolge" min="-2" pref="146" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="jScrollPane1" alignment="0" pref="541" max="32767" attributes="2"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="541" max="32767" attributes="2"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblTyp" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfdTyp" min="-2" pref="237" max="-2" attributes="1"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblAufbau" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfdAufbau" alignment="0" min="-2" pref="292" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tfdArt" linkSize="2" alignment="0" pref="158" max="32767" attributes="1"/>
+                          <Component id="lblArt" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="modellartPanel" linkSize="2" alignment="0" max="32767" attributes="1"/>
+                          <Component id="modellStandortPanel" linkSize="2" alignment="0" max="32767" attributes="1"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
+              <Component id="imagePanel" max="32767" attributes="2"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="imagePanel" max="32767" attributes="2"/>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="tfdHersteller" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblHerstellerNummer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblHersteller" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblAuflage" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfdAuflage" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfdHerstellerNummer" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblMarke" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAchsfolge" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tfdMarke" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdAchsfolge" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -118,54 +166,41 @@
                           <Component id="lblTyp" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAufbau" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="tfdTyp" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfdAufbau" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tfdTyp" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfdAufbau" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDruck" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="58" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblBemerkung" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="lblHersteller" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfdHersteller" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblHerstellerNummer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfdHerstellerNummer" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Component id="lblAuflage" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfdAuflage" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Component id="lblBemerkung" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblArt" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="tfdArt" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="modellartPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="modellStandortPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblArt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfdArt" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="preisePanel" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="lblProduktionsdatum" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfdProduktionsdatum" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblProduktionsdatum" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblAenderungsdatum" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfdAenderungsdatum" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tfdAenderungsdatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -194,18 +229,18 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="lblImage" alignment="0" pref="723" max="32767" attributes="1"/>
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="tfdImageFile" pref="365" max="32767" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="tfdImageFile" pref="621" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnDurchsuchen" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Component id="lblImage" alignment="0" pref="473" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="lblImage" pref="171" max="32767" attributes="0"/>
+                  <Component id="lblImage" pref="265" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfdImageFile" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -286,7 +321,7 @@
                       <Component id="rbWerbemodell" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rbEigenbau" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -357,7 +392,7 @@
                       <Component id="rbDinklage" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rbGarbsen" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="86" max="32767" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -506,7 +541,7 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 85]"/>
+              <Dimension value="[250, 85]"/>
             </Property>
           </Properties>
           <BindingProperties>
@@ -533,6 +568,9 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[250, 85]"/>
+            </Property>
           </Properties>
           <BindingProperties>
             <BindingProperty name="text" source="model" sourcePath="${bemerkung}" target="jTextArea1" targetPath="text" updateStrategy="0" immediately="false">
@@ -646,33 +684,35 @@
         <Property name="text" type="java.lang.String" value="Produktionsdatum"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdProduktionsdatum">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[80, 25]"/>
-        </Property>
-      </Properties>
-      <BindingProperties>
-        <BindingProperty name="text" source="model" sourcePath="${produktionsdatum}" target="tfdProduktionsdatum" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
-      </BindingProperties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblAenderungsdatum">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;nderungsdatum"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfdAenderungsdatum">
+    <Component class="javax.swing.JFormattedTextField" name="tfdAenderungsdatum">
       <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="d.M.yyyy" subtype="-1" type="1"/>
+        </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[80, 25]"/>
         </Property>
       </Properties>
       <BindingProperties>
-        <BindingProperty name="text" source="model" sourcePath="${aenderungsdatum}" target="tfdAenderungsdatum" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-        </BindingProperty>
+        <BindingProperty name="value" source="model" sourcePath="${aenderungsdatum}" target="tfdAenderungsdatum" targetPath="value" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="d.M.yyyy" subtype="-1" type="1"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[80, 25]"/>
+        </Property>
+      </Properties>
+      <BindingProperties>
+        <BindingProperty name="value" source="model" sourcePath="${produktionsdatum}" target="jFormattedTextField1" targetPath="value" updateStrategy="0" immediately="false"/>
       </BindingProperties>
     </Component>
   </SubComponents>

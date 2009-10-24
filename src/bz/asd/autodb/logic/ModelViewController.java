@@ -17,6 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import bz.asd.autodb.data.CollectionChangeListener;
+import bz.asd.autodb.data.Settings;
+import bz.asd.autodb.data.UserSession;
+import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
@@ -97,7 +100,8 @@ public class ModelViewController extends Controller implements CollectionChangeL
     }
 
     public void chooseImageFile() {
-        JFileChooser fileChooser = new javax.swing.JFileChooser();
+        UserSession session = Settings.getInstance().getUserSession();
+        JFileChooser fileChooser = new javax.swing.JFileChooser(session.getLastImagePath());
         fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
         /*FileNameExtensionFilter filter = new FileNameExtensionFilter(
         "JPG & GIF Images", "jpg", "gif");
@@ -106,7 +110,10 @@ public class ModelViewController extends Controller implements CollectionChangeL
         if(returnVal != JFileChooser.APPROVE_OPTION) return;
         // only continue on ok-Button
 
-        modelView.getModel().setBilddatei(fileChooser.getSelectedFile().getAbsolutePath());
+        File selectedFile = fileChooser.getSelectedFile();
+        session.setLastImagePath(selectedFile.getParent());
+
+        modelView.getModel().setBilddatei(selectedFile.getAbsolutePath());
         modelView.repaint();
     }
 

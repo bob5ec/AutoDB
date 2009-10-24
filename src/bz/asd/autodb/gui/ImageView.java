@@ -82,30 +82,10 @@ public class ImageView implements Icon, Serializable {
 
     public int getIconWidth() {
         return 425;
-        /*if(initComponentWidth == 0) initComponentWidth = scaledWidth;
-        return initComponentWidth;*/
     }
 
     public int getIconHeight() {
         return 265;
-        /*if(initComponentHight == 0) initComponentHight = scaledHeight;
-        return initComponentHight;*/
     }
-
-    /*public int getMaxHeight() {
-        return maxHeight;
-    }
-
-    public void setMaxHeight(int maxHeight) {
-        this.maxHeight = maxHeight;
-    }
-
-    public int getMaxWidth() {
-        return maxWidth;
-    }
-
-    public void setMaxWidth(int maxWidth) {
-        this.maxWidth = maxWidth;
-    }*/
 
 }
