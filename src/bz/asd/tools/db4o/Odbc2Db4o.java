@@ -76,7 +76,7 @@ public class Odbc2Db4o {
             model.setPreisVK(Double.parseDouble(filter(rSet.getString(16))));
             model.setPreisSL(Double.parseDouble(filter(rSet.getString(17))));
 
-            model.setAenderungsdatum(dateString2Date(filter(rSet.getString(18))));
+            model.setAenderungsdatum(dateString2Date(rSet.getString(18)));
             model.setProduktionsdatum(filter(rSet.getString(19)));
             model.setAufbau(filter(rSet.getString(20)));
         }
@@ -90,9 +90,10 @@ public class Odbc2Db4o {
         Date res = null;
         try {
             res = format.parse(str);
-        } catch (ParseException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Odbc2Db4o.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("date String was:"+str);
+            res = new Date();
         }
         return res;
     }

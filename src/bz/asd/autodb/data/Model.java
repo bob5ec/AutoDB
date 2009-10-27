@@ -20,7 +20,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
             BILDDATEI = 4, MODELLSTANDORT = 5, MARKE = 6, ACHSFOLGE = 7, TYP = 8, AUFBAU = 9,
             ART = 10, DRUCK = 11, PREISEK = 12, PREISVK = 13, PREISSL = 14, MODELLART = 15,
             AENDERUNGSDATUM = 16;
-    public static int ATTRIBUTE_COUNT = 17;
+    public static final int ATTRIBUTE_COUNT = 17;
     public static final String[] MODELLART_NAMES = {"Serienmodell", "Werbemodell", "Umbau"};
     public static final String[] MODELLSTANDORT_NAMES = {"Wettmar", "Dinklage"};
     //todo a sort is an int array containig these numbers. the first element
@@ -92,14 +92,27 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
         }
 
         int res;
+        double resTmp;
         switch (attribute) {
+            case PREISEK:
+                resTmp = o.preisEK - preisEK;
+                res = (int)Math.signum(resTmp);
+                break;
+            case PREISVK:
+                resTmp = o.preisVK - preisVK;
+                res = (int)Math.signum(resTmp);
+                break;
+            case PREISSL:
+                resTmp = o.preisSL - preisSL;
+                res = (int)Math.signum(resTmp);
+                break;
             case MODELLART:
-                res = o.modellArt - modellArt;
-                if (res < 0) {
-                    res = -1;
-                } else if (res > 0) {
-                    res = 1;
-                }
+                resTmp = o.modellArt - modellArt;
+                res = (int)Math.signum(resTmp);
+                break;
+            case MODELLSTANDORT:
+                resTmp = o.modellStandort - modellStandort;
+                res = (int)Math.signum(resTmp);
                 break;
             case AENDERUNGSDATUM:
                 res = aenderungsdatum.compareTo(o.aenderungsdatum);
@@ -122,6 +135,7 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
         return res;
     }
 
+
     @Override
     public String toString() {
         int[] order = new int[0];
@@ -140,7 +154,8 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
         for (int i = groupLevel; i < order.length; i++) {
             String val = getStringValue(order[i]);
             if (val.length() != 0) {
-                res.append(ATTRIBUTE_NAMES[order[i]] + "=" + val + " ");
+                //res.append(ATTRIBUTE_NAMES[order[i]] + "=" + val + " ");
+                res.append(val + " ");
             }
         }
 

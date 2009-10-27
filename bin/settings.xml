@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_12" class="java.beans.XMLDecoder"> 
+ <object class="bz.asd.autodb.data.UserSession"> 
+  <void property="lastImagePath"> 
+   <string></string> 
+  </void> 
+  <void property="lastOpenFiles"> 
+   <object class="bz.asd.autodb.data.RingBuffer"> 
+    <void id="ObjectArray0" property="buffer"/> 
+    <void property="buffer"> 
+     <object idref="ObjectArray0"/> 
+    </void> 
+    <void property="size"> 
+     <int>5</int> 
+    </void> 
+   </object> 
+  </void> 
+  <void property="windowSize"> 
+   <object class="java.awt.Dimension"> 
+    <int>800</int> 
+    <int>600</int> 
+   </object> 
+  </void> 
+ </object> 
+ <object class="bz.asd.autodb.data.TreeViewSettings"> 
+  <void property="groupLevel"> 
+   <int>2</int> 
+  </void> 
+  <void property="order"> 
+   <array class="int" length="0"/> 
+  </void> 
+ </object> 
+</java> 

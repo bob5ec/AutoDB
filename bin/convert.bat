@@ -1,0 +1,1 @@
+java -cp AutoDB.jar;lib\db4o-6.4.54.11278-java5.jar bz.asd.tools.db4o.Odbc2Db4o
