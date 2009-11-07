@@ -56,6 +56,7 @@ public class DbViewController extends Controller implements CloseListener {
 
         tvc = new TreeViewController(getModel(), mvc);
         tvc.setParentFrame(parentFrame);
+        //tvc.getDefaultSelectedNode()
 
         DbView dbView = new DbView(this, tvc.getView(), mvc.getView());
         return dbView;

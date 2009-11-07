@@ -13,6 +13,13 @@ public class Db4oModel extends DefaultModel implements DbSupport {
         super();
     }
 
+    // if data structure is changed, use this method to convert "old" objects to
+    // "new" ones. This method is called after db4o has filled in the data from
+    // the db and before the object is given to the
+    /*public void objectOnActivate(ObjectContainer container) {
+
+    }*/
+
     protected void setModelState(CollectionState<Db4oModel> modelState) {
         this.modelState = modelState;
     }

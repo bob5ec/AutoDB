@@ -58,6 +58,10 @@ public class ModelView extends javax.swing.JPanel implements View {
         repaint();
     }
 
+    public void focus() {
+        tfdHersteller.requestFocusInWindow();
+    }
+
     public Model getModel() {
         return model;
     }
@@ -375,7 +379,7 @@ public class ModelView extends javax.swing.JPanel implements View {
                     .addComponent(tfdPreisEK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdPreisVK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfdPreisSL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         lblProduktionsdatum.setText("Produktionsdatum");

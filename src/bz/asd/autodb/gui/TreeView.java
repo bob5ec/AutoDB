@@ -57,7 +57,7 @@ public class TreeView extends javax.swing.JPanel implements View {
     public void selectNode(DefaultMutableTreeNode node) {
         TreePath path = new TreePath(node.getPath());
         jTree1.setSelectionPath(path);
-		jTree1.scrollPathToVisible(path);
+	jTree1.scrollPathToVisible(path);
     }
 
     /** This method is called from within the constructor to

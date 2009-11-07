@@ -120,6 +120,7 @@ public class ModelViewController extends Controller implements CollectionChangeL
     /*CollectionChangeListener implementation */
 
     public void added(Model element) {
+        modelView.focus();
     }
 
     public void deleted(Model element) {

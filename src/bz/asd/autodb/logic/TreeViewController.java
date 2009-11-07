@@ -11,6 +11,7 @@ import bz.asd.mvc.Controller;
 import bz.asd.mvc.View;
 import bz.asd.autodb.gui.TreeView;
 import bz.asd.autodb.data.Model;
+import java.util.Enumeration;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
@@ -33,6 +34,17 @@ public class TreeViewController extends Controller implements ListController, Co
         tvs = Settings.getInstance().getTreeViewSettings();
 
         init();
+        //TODO selecting a node here lets the ModelView disapeare
+        // select the first Element in the tree
+        //getView().selectNode(getDefaultSelectedNode());
+    }
+
+    public DefaultMutableTreeNode getDefaultSelectedNode() {
+        DefaultMutableTreeNode node = null;
+        // focus the first entry in the tree
+        Enumeration<DefaultMutableTreeNode> nodes = getModel().getRoot().children();
+        if(nodes.hasMoreElements()) node = nodes.nextElement();
+        return node;
     }
 
     public String getModelString(Object o) {

@@ -621,7 +621,7 @@
                       <Component id="tfdPreisVK" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfdPreisSL" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
