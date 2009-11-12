@@ -37,6 +37,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
         this.dbView = dbView;
         initComponents();
         initAccelerators();
+        //TODO remove after settings dialoge exist
         Settings.getInstance().getTreeViewSettings().setGroupLevel(2);
     }
 
@@ -90,8 +91,7 @@ public class MainWindow extends javax.swing.JFrame implements View {
         modellMenu = new javax.swing.JMenu();
         modellNeuMenuItem = new javax.swing.JMenuItem();
         loeschenMenuItem = new javax.swing.JMenuItem();
-        kopierenMenuItem = new javax.swing.JMenuItem();
-        einfuegenMenuItem = new javax.swing.JMenuItem();
+        doppelnMenuItem = new javax.swing.JMenuItem();
         optionenMenu = new javax.swing.JMenu();
         sortierungMenuItem = new javax.swing.JMenuItem();
 
@@ -172,13 +172,14 @@ public class MainWindow extends javax.swing.JFrame implements View {
         });
         modellMenu.add(loeschenMenuItem);
 
-        kopierenMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        kopierenMenuItem.setText("Kopieren");
-        modellMenu.add(kopierenMenuItem);
-
-        einfuegenMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        einfuegenMenuItem.setText("Einfügen");
-        modellMenu.add(einfuegenMenuItem);
+        doppelnMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        doppelnMenuItem.setText("Doppeln");
+        doppelnMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doppelnMenuItemActionPerformed(evt);
+            }
+        });
+        modellMenu.add(doppelnMenuItem);
 
         jMenuBar1.add(modellMenu);
 
@@ -230,6 +231,10 @@ public class MainWindow extends javax.swing.JFrame implements View {
         dbvc.deleteModel();
     }//GEN-LAST:event_loeschenMenuItemActionPerformed
 
+    private void doppelnMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doppelnMenuItemActionPerformed
+        dbvc.cloneModel();
+    }//GEN-LAST:event_doppelnMenuItemActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -246,9 +251,8 @@ public class MainWindow extends javax.swing.JFrame implements View {
     private javax.swing.JMenuItem dateiNeuMenuItem;
     private javax.swing.JMenuItem dateiOeffnenMenuItem;
     private javax.swing.JPanel dbView;
-    private javax.swing.JMenuItem einfuegenMenuItem;
+    private javax.swing.JMenuItem doppelnMenuItem;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem kopierenMenuItem;
     private javax.swing.JMenuItem loeschenMenuItem;
     private javax.swing.JMenu modellMenu;
     private javax.swing.JMenuItem modellNeuMenuItem;

@@ -1,6 +1,7 @@
 package bz.asd.autodb.logic;
 
 import bz.asd.autodb.data.Database;
+import bz.asd.autodb.data.DbSupport;
 import bz.asd.mvc.Controller;
 import bz.asd.mvc.Model;
 import bz.asd.mvc.View;
@@ -42,6 +43,21 @@ public class DbViewController extends Controller implements CloseListener {
     public void deleteModel() {
         try {
             getModel().deleteModel(mvc.getModel()); //Displayes are notified via Database
+        } catch (Exception ex) {
+            handleException("Fehler beim Anlegen des Modells.", ex);
+            Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * User wants to create a coppy of the current displayed Model
+     */
+    public void cloneModel() {
+        try {
+            bz.asd.autodb.data.Model original = mvc.getModel();
+            bz.asd.autodb.data.Model coppy = getModel().createModel();
+            original.cloneTo(coppy);
+            //((DbSupport) coppy).update(); //IMPROVE unschön
         } catch (Exception ex) {
             handleException("Fehler beim Anlegen des Modells.", ex);
             Logger.getLogger(DbViewController.class.getName()).log(Level.SEVERE, null, ex);

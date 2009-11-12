@@ -32,8 +32,8 @@
   </void> 
   <void property="windowSize"> 
    <object class="java.awt.Dimension"> 
-    <int>1022</int> 
-    <int>750</int> 
+    <int>1083</int> 
+    <int>804</int> 
    </object> 
   </void> 
  </object> 

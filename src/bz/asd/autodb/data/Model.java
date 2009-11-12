@@ -75,6 +75,29 @@ public abstract class Model implements Groupable<Model>, bz.asd.mvc.Model {
         }
     }
 
+    public void cloneTo(Model clone) {
+        clone.hersteller = hersteller;
+        clone.herstellerNr = herstellerNr;
+        clone.auflage = auflage;
+        clone.produktionsdatum = produktionsdatum;
+        clone.bilddatei = bilddatei;
+        clone.marke = marke;
+        clone.achsfolge = achsfolge;
+        clone.typ = typ;
+        clone.aufbau = aufbau;
+        clone.art = art;
+        clone.druck = druck;
+        clone.bemerkung = bemerkung;
+        clone.modellArt = modellArt;
+        clone.modellStandort = modellStandort;
+        clone.preisEK = preisEK;
+        clone.preisVK = preisVK;
+        clone.preisSL = preisSL;
+        clone.aenderungsdatum = new Date(aenderungsdatum.getTime());
+        clone.extraProperties.addAll(extraProperties);
+        clone.notifyChangeListener();
+    }
+
     private boolean equals(String a, String b) {
         return (a == null && b == null) ||
                 a != null && b != null && a.equals(b);
