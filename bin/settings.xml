@@ -17,8 +17,8 @@
   </void> 
   <void property="windowSize"> 
    <object class="java.awt.Dimension"> 
-    <int>800</int> 
-    <int>600</int> 
+    <int>957</int> 
+    <int>775</int> 
    </object> 
   </void> 
  </object> 
@@ -27,7 +27,14 @@
    <int>2</int> 
   </void> 
   <void property="order"> 
-   <array class="int" length="0"/> 
+   <array class="int" length="3"> 
+    <void index="1"> 
+     <int>4</int> 
+    </void> 
+    <void index="2"> 
+     <int>8</int> 
+    </void> 
+   </array> 
   </void> 
  </object> 
 </java> 

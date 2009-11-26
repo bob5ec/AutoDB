@@ -8,6 +8,7 @@ import bz.asd.mvc.View;
 import bz.asd.autodb.gui.DbView;
 import bz.asd.autodb.gui.YesNoDialog;
 import java.awt.Container;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,10 +54,19 @@ public class DbViewController extends Controller implements CloseListener {
      * User wants to create a coppy of the current displayed Model
      */
     public void cloneModel() {
+
+        bz.asd.autodb.data.Model original = mvc.getModel();
+        if(original == null) {
+            handleUserError("Es ist kein Modell zum Doppeln ausgewählt.");
+            return;
+        }
+
         try {
-            bz.asd.autodb.data.Model original = mvc.getModel();
+            
             bz.asd.autodb.data.Model coppy = getModel().createModel();
             original.cloneTo(coppy);
+            //coppy.setAenderungsdatum(new Date());
+            //mvc.refreshModel();
             //((DbSupport) coppy).update(); //IMPROVE unschön
         } catch (Exception ex) {
             handleException("Fehler beim Anlegen des Modells.", ex);

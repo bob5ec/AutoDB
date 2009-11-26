@@ -64,13 +64,18 @@ public class ModelViewController extends Controller implements CollectionChangeL
         return (Model) model;
     }
 
+    public void refreshModel() {
+        modelView.refreshModel();
+    }
+
     /**
      * Set the Model to display.
      * @param model the model to display. If <i>null</i> a placeholder is used
      */
     public void setModel(Model model) {
-        if(model == this.model
-                || (model != null && model.equals(this.model))) return;
+        //IMPROVE this check makes sense, but does not work together with cloning
+        if(model == this.model) return;
+                //|| (model != null && model.equals(this.model))) return;
 
         this.model = model;
 
@@ -120,7 +125,9 @@ public class ModelViewController extends Controller implements CollectionChangeL
     /*CollectionChangeListener implementation */
 
     public void added(Model element) {
-        modelView.focus();
+        // IMPROVE Focus does not work if no model was selected before adding a new one
+        // eg. on startup
+        if(modelView != null) modelView.focus();
     }
 
     public void deleted(Model element) {

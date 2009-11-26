@@ -58,6 +58,13 @@ public class ModelView extends javax.swing.JPanel implements View {
         repaint();
     }
 
+    public void refreshModel() {
+        repaint();
+        /*for(Binding binding : bindingGroup.getBindings()) {
+            binding.refreshAndNotify();
+        }*/
+    }
+
     public void focus() {
         tfdHersteller.requestFocusInWindow();
     }

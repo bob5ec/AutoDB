@@ -9,19 +9,19 @@
     <void property="buffer"> 
      <array class="java.lang.Object" length="5"> 
       <void index="0"> 
-       <string>/home/lars/odbcExport1256399268687.db4o</string> 
-      </void> 
-      <void index="1"> 
        <string>/home/lars/odbcExport1256412013593.db4o</string> 
       </void> 
-      <void index="2"> 
+      <void index="1"> 
        <string>/home/lars/odbcExport1256411827296.db4o</string> 
       </void> 
-      <void index="3"> 
+      <void index="2"> 
        <string>/home/lars/odbcExport1256411770593.db4o</string> 
       </void> 
-      <void index="4"> 
+      <void index="3"> 
        <string>/home/lars/odbcExport1256662364656.db4o</string> 
+      </void> 
+      <void index="4"> 
+       <string>/home/lars/test.db4o</string> 
       </void> 
      </array> 
     </void> 
