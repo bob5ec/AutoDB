@@ -1,0 +1,3 @@
+AutoDB is a Java Desktop application to manage a collection of things; my it be stones, butterflies or model cars.
+
+It's based on Db4o and NetBeans is used to generate most of the GUI.
